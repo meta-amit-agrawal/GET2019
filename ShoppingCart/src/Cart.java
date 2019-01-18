@@ -4,52 +4,54 @@ import java.util.Scanner;
 
 public class Cart  {
 	
-	public static ArrayList<Item> cart=new ArrayList<Item>();
+	public static ArrayList<Item> cartItemList=new ArrayList<Item>();
 	Scanner sc=new Scanner(System.in);
-	int cartChoice;
-	public void addItem(Item i)
+	public void addItem(Item newItem)
 	{
-		Item i1;
+		Item existingItem;
 		int j,flag=0;
-		for(j=0;j<cart.size();j++)
+		for(j=0;j<cartItemList.size();j++)
 		{
-			i1=cart.get(j);
-			if(i.getProductId()==i1.getProductId())
+			existingItem=cartItemList.get(j);
+			if(newItem.getProductId()==existingItem.getProductId())
 			{
-				i1.setProductQty(i1.getProductQty()+i.getProductQty());
+				existingItem.setProductQty(existingItem.getProductQty()+newItem.getProductQty());
+	
+	
 				flag=1;
 			}
 		}
 		if(flag!=1)
 		{
-			cart.add(i);
+			cartItemList.add(newItem);
 		}
 		
 	}
 	
 	public void removeItem(int id)
 	{
-		int i,remove_qty;
-		Item i1;
+		int i,remove_qty,final_qty;
+		Item existingItem;
 		
-			for(i=0;i<cart.size();i++)
+			for(i=0;i<cartItemList.size();i++)
 			{
-			i1=cart.get(i);
-			if(i1.getProductId()==id)
+			existingItem=cartItemList.get(i);
+			if(existingItem.getProductId()==id)
 			{
 				System.out.println("Enter the quantity to be removed...");
-				while((remove_qty=sc.nextInt())>i1.getProductQty())
+				while((remove_qty=sc.nextInt())>existingItem.getProductQty())
 				{
 					System.out.println("Quantity present in cat is less than the entered quantity!!!");
 					System.out.println("\nPlease Re-enter the quantity...");
 				}
-				if((i1.getProductQty()-remove_qty)==0)
+				final_qty=existingItem.getProductQty()-remove_qty;
+				if(final_qty==0)
 				{
-					cart.remove(i);
+					cartItemList.remove(i);
 				}
 				else
 				{
-				i1.setProductQty(i1.getProductQty()-remove_qty);
+				existingItem.setProductQty(final_qty);
 				}
 				System.out.println("Item updated Successfully");
 			}
@@ -70,24 +72,25 @@ public class Cart  {
 		else
 		{
 			int i;
-			Item  i1;
+			Item  existingItem;
 			float finalbillamount=0.0f;
 			System.out.println("\n\nYour Final Cart is as follows");
 			showCart();
-			for(i=0; i<cart.size(); i++)
+			for(i=0; i<cartItemList.size(); i++)
 			{
-				i1=cart.get(i);
-				finalbillamount= finalbillamount+(i1.getProductPrice()*i1.getProductQty());
+				existingItem=cartItemList.get(i);
+				finalbillamount= finalbillamount+(existingItem.getProductPrice()*existingItem.getProductQty());
 				
 			}
-		System.out.println("\nYour Final amount is......"+finalbillamount);
-		cart.clear();;
+			System.out.println("\nYour Final amount is......"+finalbillamount);
+			cartItemList.clear();
+			
 		}
 	}
 	
 	public void showCart()
 	{
-		Item i1;
+		Item cartItems;
 		int i;
 		if(isCartEmpty())
 		{
@@ -96,31 +99,27 @@ public class Cart  {
 		else
 		{
 		System.out.println("\nID\tName\tPrice\tQuantity");
-		for(i=0; i<cart.size(); i++)
+
+		for(i=0; i<cartItemList.size(); i++)
 		{
 			
-			i1=cart.get(i);
-			System.out.println("\n"+i1.getProductId()+"\t"+i1.getProductName()+"\t"+i1.getProductPrice()+"\t"+i1.getProductQty());
-	//		showCartMenu();
-		}
+			cartItems=cartItemList.get(i);
+			System.out.println("\n"+cartItems.getProductId()+"\t"+cartItems.getProductName()+"\t"+cartItems.getProductPrice()+"\t"+cartItems.getProductQty());
 		}
 		
+		
 	}
-	public void showCartMenu()
-	{
-		System.out.println("Choose the option for cart");
-		System.out.println("2. Remove an Item");
-		System.out.println("3. Modify an Item");
-		System.out.println("4. Generate final bill");
-		cartChoice=sc.nextInt();
 	}
+
+	
 	public boolean isCartEmpty()
 	{
-		if(cart.size()==0)
+		if(cartItemList.size()==0)
+
 		{
 			return true;
 		}
 		return false;
 	}
-	
+
 }
