@@ -31,21 +31,7 @@ public class TestCaseClass
 		  arrayOperations.splitArray(num);
 	}
 	
-	//test case with split method with input (Negative Test Case)
-	@Test(expected = AssertionError.class)
-	public void testCaseSplitArrayNullArrayNegative()
-	{
-		int num[] = new int[]{2, 1, 1, 2, 1};	//but sends an array with input instead of null
-		  arrayOperations.splitArray(num);
-	}
 	
-	//test case of split method with null array (Negative Test Case)
-	@Test
-	public void testCaseSplitArrayInputNegative()
-	{
-		int num[] = new int[]{1,1,1,2,1};
-		assertEquals(-1, arrayOperations.splitArray(num));	//expected -1 but receives 3
-	}
 	
 	
 	
@@ -76,21 +62,7 @@ public class TestCaseClass
 		assertEquals(2, arrayOperations.countClumbs(num));
 	}
 	
-	//test case with countClumb method with null array (Negative Test Case)
-	@Test
-	public void testCaseClumbNullArrayNegative()
-	{
-		int num[] = new int[]{};
-		arrayOperations.countClumbs(num);	//expected exception 
-	}
 	
-	//test case with countClumb method with Input (Negative Test Case)
-	@Test
-	public void testCaseClumbInputNegative()
-	{
-		int num[] = new int[]{1,2,2,3,4,4};
-		assertEquals(1, arrayOperations.countClumbs(num));	//expected 1 but receives 2
-	}
 	
 	
 	
@@ -175,20 +147,8 @@ public class TestCaseClass
 		arrayOperations.maximumMirrorCount(num);
 	}
 	
-	//test case of maximumMirrorCount with null array (Negative Test Case)
-	@Test(expected = AssertionError.class)
-	public void testcaseMirrorCountNullArrayNegative()
-	{
-		int num[]=new int[]{1, 4, 5, 3, 5, 4, 1};	//passed array with values instead of null array
-		arrayOperations.maximumMirrorCount(num);	//expected exception
-	}
 	
-	//test case of maximumMirrorCount with Input (Negative Test Case)
-	@Test(expected = AssertionError.class)
-	public void testcaseMirrorCountInputNegative()
-	{
-		int num[]=new int[]{1, 4, 5, 3, 5, 4, 1};
-		assertEquals(1,arrayOperations.maximumMirrorCount(num));	//expected 1 but receives 3
-	}
+	
+	
 	
 }
