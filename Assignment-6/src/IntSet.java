@@ -106,31 +106,28 @@ public final class IntSet
 			
 			int length = size();
 			int complement[] = new int[1000 - length];
-			int index1,index2,index=0;
-			boolean flag_found=false;
+			int index1,index=0;
+			
 			
 			for(index1 = 1; index1 <= 1000; index1++)
 			{
-				
-				flag_found = false;
-				
-				for(index2 = 0; index2 <= length; index2++)
+
+				if(isMember(index1))
 				{
 					
-					if(set[index2] == index1)
-					{
-						flag_found = true;
-						break;
-					}
-					
+					continue;
 				}
 				
-				if(!flag_found)
+				else
 				{
+					;
 					complement[index++] = index1;
 				}
 				
 			}
+			
+			
+			
 			return complement;
 		}
 		
@@ -151,24 +148,18 @@ public final class IntSet
 		{
 			int subset[] = subset_object.getSet();
 			
-			int subset_length,set_length,index1,count=0;
+			int subset_length,count=0;
 			
-			subset_length = subset_object.size();
-			set_length = size();
-			
-			for(index1 = 0; index1 < set_length; index1++)
+			subset_length = subset_object.size();			
+							
+			for(int index2 = 0; index2 <subset_length; index2++)
 			{
-				
-				for(int index2 = 0; index2 <subset_length; index2++)
+					
+				if(isMember(subset[index2]))
 				{
-					
-					if(set[index1] == subset[index2])
-					{
-						count++;
-					}
-					
+					count++;
 				}
-				
+					
 			}
 			
 			if(count == subset_length)
@@ -248,5 +239,12 @@ public final class IntSet
 		}
 	}
 	
+	public static void main(String args[])
+	{
+		IntSet i1 = new IntSet(new int[]{1,2,3,4,5,6,7});
+		IntSet i2 = new IntSet(new int[]{1,2,3,4});
+		//System.out.println(i1.isSubSet(i2));
+		i1.getComplement();
+	}
 	
 }
