@@ -114,19 +114,15 @@ public final class IntSet
 
 				if(isMember(index1))
 				{
-					
 					continue;
 				}
 				
 				else
 				{
-					;
 					complement[index++] = index1;
 				}
 				
 			}
-			
-			
 			
 			return complement;
 		}
@@ -150,7 +146,7 @@ public final class IntSet
 			
 			int subset_length,count=0;
 			
-			subset_length = subset_object.size();			
+			subset_length = subset_object.size();	
 							
 			for(int index2 = 0; index2 <subset_length; index2++)
 			{
@@ -239,12 +235,6 @@ public final class IntSet
 		}
 	}
 	
-	public static void main(String args[])
-	{
-		IntSet i1 = new IntSet(new int[]{1,2,3,4,5,6,7});
-		IntSet i2 = new IntSet(new int[]{1,2,3,4});
-		//System.out.println(i1.isSubSet(i2));
-		i1.getComplement();
-	}
+	
 	
 }
