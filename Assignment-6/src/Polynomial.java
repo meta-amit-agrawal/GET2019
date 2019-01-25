@@ -38,8 +38,10 @@ public final class Polynomial
 		for(index=0;index<input_poly.length;index++)
 			if(input_poly[index]!=0 && row<length)
 			{
+				
 				poly[row][column]=input_poly[index];
 				poly[row++][column+1]=index;
+				
 			}
 		
 	}
@@ -52,21 +54,30 @@ public final class Polynomial
 	 */
 	public int degree()
 	{
-		int row,column=1,length=poly.length;
-		int max_degree=0;
-		
-		for(row=0;row<length;row++)
+		try
 		{
+			int row,column=1,length=poly.length;
+			int max_degree=0;
 			
-			//checks for maximum degree
-			if(max_degree < poly[row][column])
+			for(row=0;row<length;row++)
 			{
-				max_degree = poly[row][column];
+				
+				//checks for maximum degree
+				if(max_degree < poly[row][column])
+				{
+					
+					max_degree = poly[row][column];
+					
+				}
+				
 			}
 			
+			return max_degree;
 		}
-		
-		return max_degree;
+		catch(Exception e)
+		{
+			throw e;
+		}
 	}
 	
 	 /*
@@ -75,16 +86,26 @@ public final class Polynomial
 	  */
 	 public float evaluate(float value)
 	 {
-		 float result=0.0f;
-		 int column=0,index;
-		 
-		 //evaluates the polynomial with the given input as value of variable
-		 for(index=0;index<poly.length;index++)
+		 try
 		 {
-			 result= result+(float)Math.pow(value, poly[index][column+1])*poly[index][column];
+			 float result=0.0f;
+			 int column=0,index;
+			 
+			 //evaluates the polynomial with the given input as value of variable
+			 for(index=0;index<poly.length;index++)
+			 {
+				 
+				 result= result+(float)Math.pow(value, poly[index][column+1])*poly[index][column];
+				 
+			 }
+			 
+			 return result;
 		 }
 		 
-		 return result;
+		 catch(Exception e)
+		 {
+			 throw e;
+		 }
 	 }
 	
 	 /*
@@ -94,60 +115,89 @@ public final class Polynomial
 	  */
 	static int[] addPoly(Polynomial p1, Polynomial p2)
 	{
-		
-		ArrayList<Integer> coefficient= new ArrayList<Integer>();
-		ArrayList<Integer> degree= new ArrayList<Integer>(); 
-		int index,column=0; 
-		
-		//checks for same degree coefficients and them , store in arraylist coefficients
-		for(index=0;index<p1.poly.length;index++)
+		try
 		{
-			for(int j=0;j<p2.poly.length; j++)
+			ArrayList<Integer> coefficient= new ArrayList<Integer>();
+			ArrayList<Integer> degree= new ArrayList<Integer>(); 
+			int index,column=0; 
+			
+			//checks for same degree coefficients and them , store in arraylist coefficients
+			for(index=0;index<p1.poly.length;index++)
 			{
-				if(p1.poly[index][column+1]==p2.poly[j][column+1])
+				
+				for(int j=0;j<p2.poly.length; j++)
 				{
-					coefficient.add(p1.poly[index][column]+p2.poly[j][column]);
-					degree.add(p1.poly[index][column+1]);
-					break;
+					
+					if(p1.poly[index][column+1]==p2.poly[j][column+1])
+					{
+						
+						coefficient.add(p1.poly[index][column]+p2.poly[j][column]);
+						degree.add(p1.poly[index][column+1]);
+						break;
+						
+					}
+					
 				}
+				
 			}
+			
+			//checks for remaining elements in polynomial 1 which are not added in coefficients arraylist  
+			for(index=0;index<p1.poly.length;index++)
+			{
+				
+				if (!degree.contains(p1.poly[index][column+1]))
+				{
+					
+					coefficient.add(p1.poly[index][column]);
+					degree.add(p1.poly[index][column+1]);
+					
+				}
+				
+			}
+			
+			//checks for remaining elements in polynomial 2 which are not added in coefficients arraylist
+			for(index=0;index<p2.poly.length;index++)
+			{
+				
+				if (!degree.contains(p2.poly[index][column+1]))
+				{
+					
+					coefficient.add(p2.poly[index][column]);
+					degree.add(p2.poly[index][column+1]);
+					
+				}
+				
+			}
+			
+			//converting it back to the array in 1D
+			int[] aPoly = new int[Collections.max(degree)+1];
+			for(index =0;index<aPoly.length;index++)
+			{
+				
+				if(degree.contains(index))
+				{
+					
+					int pos = degree.indexOf(index);
+					aPoly[index] = coefficient.get(pos);
+					
+				}
+				
+				else
+				{
+					
+					aPoly[index] = 0;
+					
+				}
+				
+			}
+			
+			return aPoly;
 		}
 		
-		//checks for remaining elements in polynomial 1 which are not added in coefficients arraylist  
-		for(index=0;index<p1.poly.length;index++)
+		catch(Exception e)
 		{
-			if (!degree.contains(p1.poly[index][column+1]))
-			{
-				coefficient.add(p1.poly[index][column]);
-				degree.add(p1.poly[index][column+1]);
-			}
+			throw e;
 		}
-		
-		//checks for remaining elements in polynomial 2 which are not added in coefficients arraylist
-		for(index=0;index<p2.poly.length;index++)
-		{
-			if (!degree.contains(p2.poly[index][column+1]))
-			{
-				coefficient.add(p2.poly[index][column]);
-				degree.add(p2.poly[index][column+1]);
-			}
-		}
-		
-		//converting it back to the array in 1D
-		int[] aPoly = new int[Collections.max(degree)+1];
-		for(index =0;index<aPoly.length;index++)
-		{
-			if(degree.contains(index))
-			{
-				int pos = degree.indexOf(index);
-				aPoly[index] = coefficient.get(pos);
-			}
-			else
-			{
-				aPoly[index] = 0;
-			}
-		}
-		return aPoly;
 	}
 	
 	/*
@@ -157,64 +207,87 @@ public final class Polynomial
 	 */
 	static int[] mulPoly(Polynomial p1, Polynomial p2)
 	{
-		ArrayList<Integer> coefficient= new ArrayList<Integer>();
-		ArrayList<Integer> degree=  new ArrayList<Integer>();
-		int sum,index,column=0;
-		 
-		//multiplies every term of first polynomial to each term of second polynomial
-		for(index=0;index<p1.poly.length;index++)
+		try
 		{
+			ArrayList<Integer> coefficient= new ArrayList<Integer>();
+			ArrayList<Integer> degree=  new ArrayList<Integer>();
+			int sum,index,column=0;
 			 
-			for(int j=0;j<p2.poly.length;j++)
+			//multiplies every term of first polynomial to each term of second polynomial
+			for(index=0;index<p1.poly.length;index++)
 			{
-				coefficient.add(p1.poly[index][column]*p2.poly[j][column]);
-				degree.add(p1.poly[index][column+1]+p2.poly[j][column+1]);
-			}
-		
-		}
-		 
-		//two array list to simplify the calculated coefficients and degree
-		ArrayList<Integer> finalcoff= new ArrayList<Integer>();
-		ArrayList<Integer> finaldeg= new ArrayList<Integer>(); 
-		
-		//simplifies the arraylist by adding the term of same degree
-		for(index=0;index<degree.size();index++)
-		{
-			sum=0;
-			if(!finaldeg.contains(degree.get(index)))
-			{
-				for(int j=index;j<degree.size();j++)
+				 
+				for(int j=0;j<p2.poly.length;j++)
 				{
-					if(degree.get(index)==degree.get(j))
-					{
-						sum= sum+coefficient.get(j);
-					}
+					
+					coefficient.add(p1.poly[index][column]*p2.poly[j][column]);
+					degree.add(p1.poly[index][column+1]+p2.poly[j][column+1]);
+					
 				}
-				finalcoff.add(sum);
-				finaldeg.add(degree.get(index));
+			
 			}
-		}
-	
-		//converting it back to 1D array
-		int[] mPoly = new int[Collections.max(finaldeg)+1];
+			 
+			//two array list to simplify the calculated coefficients and degree
+			ArrayList<Integer> finalcoff= new ArrayList<Integer>();
+			ArrayList<Integer> finaldeg= new ArrayList<Integer>(); 
+			
+			//simplifies the arraylist by adding the term of same degree
+			for(index=0;index<degree.size();index++)
+			{
+				sum=0;
+				
+				if(!finaldeg.contains(degree.get(index)))
+				{
+					
+					for(int j=index;j<degree.size();j++)
+					{
+						
+						if(degree.get(index)==degree.get(j))
+						{
+							
+							sum= sum+coefficient.get(j);
+							
+						}
+						
+					}
+					
+					finalcoff.add(sum);
+					finaldeg.add(degree.get(index));
+					
+				}
+				
+			}
+		
+			//converting it back to 1D array
+			int[] mPoly = new int[Collections.max(finaldeg)+1];
 
-		for(index =0;index<mPoly.length;index++)
-		{
-			
-			if(finaldeg.contains(index))
+			for(index =0;index<mPoly.length;index++)
 			{
-				int pos = finaldeg.indexOf(index);
-				mPoly[index] = finalcoff.get(pos);
+				
+				if(finaldeg.contains(index))
+				{
+					
+					int pos = finaldeg.indexOf(index);
+					mPoly[index] = finalcoff.get(pos);
+					
+				}
+				
+				else
+				{
+					
+					mPoly[index] = 0;
+					
+				}
+				
 			}
 			
-			else
-			{
-				mPoly[index] = 0;
-			}
-			
+			return mPoly;
 		}
 		
-		return mPoly;
+		catch(Exception e)
+		{
+			throw e;
+		}
 	}
 	
 }
