@@ -6,9 +6,10 @@ public class Zones
 {
 	static int id = 1;
 	String typeOfAnimal;
-	int maximumNumberOfCages ;
+	final int maximumNumberOfCages ;
 	boolean hasPark;
 	boolean hasCanteen;
+	int spareCapacity;
 	List<Cages> listOfCages = new ArrayList<Cages>();
 	
 	public Zones(String typeOfAnimal , int maximumNumberOfCages , boolean hasPark , boolean hasCanteen)
@@ -18,6 +19,7 @@ public class Zones
 		this.typeOfAnimal = typeOfAnimal;
 		this.hasCanteen = hasCanteen;
 		this.hasPark = hasPark;
+		this.spareCapacity = maximumNumberOfCages;
 	}
 	
 	
@@ -42,11 +44,11 @@ public class Zones
 		return hasCanteen;
 	}
 	
-	public int getNumberOfAvailCages()
+	public int getAvailableCages()
 	{
-		if(maximumNumberOfCages > listOfCages.size())
+		if(isSpaceAvailabe())
 		{
-			return maximumNumberOfCages-listOfCages.size();
+			return spareCapacity;
 		}
 		else
 		{
@@ -56,8 +58,22 @@ public class Zones
 	
 	public boolean isSpaceAvailabe()
 	{
-		if(maximumNumberOfCages > listOfCages.size())
+		if(spareCapacity != 0)
 		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean addCage(Cages cage)
+	{
+		if(isSpaceAvailabe())
+		{
+			listOfCages.add(cage);
+			spareCapacity--;
 			return true;
 		}
 		else
