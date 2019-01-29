@@ -6,7 +6,7 @@ public class Zoo
 {
 	final static int maximumZones = UtlityClass.numberOfZones;
 	static int spareCapacity;
-	List<Zones> listOfZones = new ArrayList<Zones>();
+	List<Zone> listOfZones = new ArrayList<Zone>();
 	
 	public Zoo()
 	{
@@ -25,7 +25,7 @@ public class Zoo
 		}
 	}
 	
-	public boolean addZone(Zones zone)
+	public boolean addZone(Zone zone)
 	{
 		if(isSpaceAvialable())
 		{
@@ -46,6 +46,18 @@ public class Zoo
 		{
 			return 0;
 		}
+	}
+	
+	public boolean isCategoryAvailable(String category)
+	{
+		for(int index=0; index<listOfZones.size();index++)
+		{
+			if(category.equalsIgnoreCase(listOfZones.get(index).getTypeOfAnimal()))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	

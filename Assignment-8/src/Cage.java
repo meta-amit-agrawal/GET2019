@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Cages 
+public class Cage 
 {
-	String typeOfAnimal;
+	String typeOfAnimal,animalCategory;
 	final int cage_capacity;
 	int spareCapacity;
 	static int cage_id =1;
 	List<Animal> listOfAnimals = new ArrayList<Animal>();
 	
-	public Cages(String typeOfAnimal , int cage_capacity)
+	public Cage(String typeOfAnimal , int cage_capacity)
 	{
 		this.typeOfAnimal = typeOfAnimal;
 		this.cage_capacity = cage_capacity;
@@ -51,16 +51,28 @@ public class Cages
 	
 	public boolean addAnimal(Animal animal)
 	{
-		if(isSpaceAvailable())
+		if(this.typeOfAnimal.equalsIgnoreCase(animal.getTypeOfAnimal())   )
 		{
-			listOfAnimals.add(animal);
-			spareCapacity--;
-			return true;
+			if(isSpaceAvailable())
+			{
+				listOfAnimals.add(animal);
+				spareCapacity--;
+				return true;
+			}
+			else
+			{
+				throw new AssertionError("Cage is full");
+			}
 		}
 		else
 		{
-			return false;
+			throw new AssertionError("This category can't be added to this cage");
 		}
+	}
+	
+	public String getCategory()
+	{
+		return typeOfAnimal;
 	}
 	
 	

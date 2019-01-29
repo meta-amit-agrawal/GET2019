@@ -1,11 +1,11 @@
 
 public class Bird extends Animal
 {
-	final String typeOfAnimal = UtlityClass.typeBird;
+	final static String typeOfAnimal = UtlityClass.typeBird;
 	
 	public Bird(String name , double weight , int age , String sound)
 	{
-		super(name , weight , age , sound);
+		super(name , weight , age , sound , typeOfAnimal);
 	}
 	
 	public String getTypeOfAnimal()

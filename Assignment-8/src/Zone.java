@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Zones 
+public class Zone 
 {
 	static int id = 1;
 	String typeOfAnimal;
@@ -10,9 +10,9 @@ public class Zones
 	boolean hasPark;
 	boolean hasCanteen;
 	int spareCapacity;
-	List<Cages> listOfCages = new ArrayList<Cages>();
+	List<Cage> listOfCages = new ArrayList<Cage>();
 	
-	public Zones(String typeOfAnimal , int maximumNumberOfCages , boolean hasPark , boolean hasCanteen)
+	public Zone(String typeOfAnimal , int maximumNumberOfCages , boolean hasPark , boolean hasCanteen)
 	{
 		id = id + 1;
 		this.maximumNumberOfCages = maximumNumberOfCages;
@@ -37,6 +37,11 @@ public class Zones
 	public boolean hasPark()
 	{
 		return hasPark;
+	}
+	
+	public String getTypeOfAnimal()
+	{
+		return typeOfAnimal;
 	}
 	
 	public boolean hasCanteen()
@@ -68,18 +73,24 @@ public class Zones
 		}
 	}
 	
-	public boolean addCage(Cages cage)
+	public boolean addCage(Cage cage)
 	{
-		if(isSpaceAvailabe())
+		if(this.typeOfAnimal.equalsIgnoreCase(cage.getCategory()))
 		{
-			listOfCages.add(cage);
-			spareCapacity--;
-			return true;
+			if(isSpaceAvailabe())
+			{
+				listOfCages.add(cage);
+				spareCapacity--;
+				return true;
+			}
+			else
+				throw new AssertionError("Zone is full");
 		}
 		else
-		{
-			return false;
-		}
+			throw new AssertionError("This category can't br adde to this zone");
+		
 	}
+	
+//	public int 
 
 }

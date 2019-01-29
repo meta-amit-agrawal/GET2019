@@ -6,22 +6,22 @@ public  class Animal
 	double weight;
 	int age;
 	String sound;
-	//String typeOfAnimal;
+	String typeOfAnimal;
 	
-	public Animal(String name , double weight , int age , String sound )//, String typeOfAnimal)
+	public Animal(String name , double weight , int age , String sound, String typeOfAnimal)
 	{
 		id += 1;
 		this.name = name;
 		this.weight = weight;
 		this.age = age;
 		this.sound = sound;
-		//this.typeOfAnimal = typeOfAnimal;
+		this.typeOfAnimal = typeOfAnimal;
 	}
 	
-	/*public String getTypeOfAnimal() 
+	public String getTypeOfAnimal() 
 	{
 		return typeOfAnimal;
-	}*/
+	}
 
 	public int getId() 
 	{
