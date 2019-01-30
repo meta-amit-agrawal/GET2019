@@ -8,7 +8,6 @@ import java.util.List;
 public class Cage {
 	int noOfAnimals=0;
 	String typeOfAnimal;
-	int zoneNo;
 	int maxNoOfAnimals;
 	String categoryofAnimal;
 	List<Animal> animalList = new ArrayList<Animal>(); 
@@ -23,21 +22,16 @@ public class Cage {
 		this.maxNoOfAnimals = maxNoOfAnimals;
 	}
 
-    /*
-    *  getAnimal method for get the list of all animal in a cage
-    */
-//	void getAnimal(int cageNo) {
-//		for (int i = 0; i < Zoo.animalList.size(); i++) {
-//			if (Zoo.animalList.get(i).getCageNo() == cageNo) {
-//				System.out.println(Zoo.animalList.get(i).getAnimalName());
-//			}
-//		}
-//	}
-
+	/*
+	 * addAnimal to add the animal to the cage 
+	 * @param requires an object of animal which is to be added
+	 * @return true if animal is added or false if same name already exist in cage
+	 */
 	boolean addAnimal(Animal animal)
 	{
 		for(int index=0;index<animalList.size();index++)
 		{
+			//checks for the same name of animal already exist or not
 			if(animalList.get(index).getAnimalName().equals(animal.getAnimalName()))
 			{
 				return false;
@@ -50,6 +44,8 @@ public class Cage {
 		
 	}
 	
+	//deathAnimal to remove the animal after the death of the animal, requires an object of animal class which contain the animal 
+	//to be deleted
 	boolean deathAnimal(Animal animal)
 	{
 
@@ -65,24 +61,5 @@ public class Cage {
 
 		return false;
 	}
-	
-	/*public void setNoOfAnimals(int noOfAnimals) {
-		this.noOfAnimals = noOfAnimals;
-	}*/
 
-	public int getMaxNoOfAnimals() {
-		return maxNoOfAnimals;
-	}
-
-	public int getNoOfAnimals() {
-		return noOfAnimals;
-	}
-
-	public String getTypeOfAnimal() {
-		return typeOfAnimal;
-	}
-
-	public int getZoneNo() {
-		return zoneNo;
-	}
 }

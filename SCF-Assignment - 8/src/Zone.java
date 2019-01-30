@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-* Zone class provides different zone with multiple number of cages to keep animal
+* Zone class provides different zone with multiple number of cages to keep animal in the zoo
 */
 
 public class Zone {
@@ -11,7 +11,7 @@ public class Zone {
 	boolean hasCanteen;
 	boolean hasPark;
 	int occupiedCage = 0;
-	public List<Cage> cageList;
+	public List<Cage> cageList= new ArrayList<Cage>();;
 	
     /*
     * parameterized constructor to initialize zone attribute
@@ -21,44 +21,31 @@ public class Zone {
 		this.categoryOfAnimal = categoryOfAnimal;
 		this.hasCanteen = hasCanteen;
 		this.hasPark = hasPark;
-		cageList = new ArrayList<Cage>();
 	}
 
+	//getCategoryOfAnimal returns the category of the animal present in the zone
 	public String getCategoryOfAnimal() {
 		return categoryOfAnimal;
 	}
 
-	public int getMaxNoOfCages() {
-		return maxNoOfCages;
-	}
-
+	
+	//addCage method to add the cage in the zone is space is available
 	boolean addCage(Cage cage)
-	{
-		
-		
+	{	
 		if(occupiedCage < maxNoOfCages)
 		{
 			cageList.add(cage);
 			occupiedCage += 1;
 			return true;
 		}
+		
 		else
 		{
 			return false;
 		}
+		
 	}
 	
-    /*
-    * getNumberOfAnimal to return the total number off animal in a zone
-    */
-//	int getNumberOfAnimal(int zoneNo) {
-//		int totalNoOfAnimals = 0;
-//		for (int i = 0; i < Zoo.cageList.size(); i++) {
-//			if (zoneNo == Zoo.cageList.get(i).getZoneNo()) {
-//				totalNoOfAnimals += Zoo.cageList.get(i).getNoOfAnimals();
-//			}
-//		}
-//		return totalNoOfAnimals;
-//	}
+
 
 }

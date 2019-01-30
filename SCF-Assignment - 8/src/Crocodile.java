@@ -10,10 +10,6 @@ class Crocodile extends Reptile {
 	public Crocodile(String animalName, int ageOfAnimal, double weightOfAnimal) {
 		
 		super(animalName , ageOfAnimal , weightOfAnimal , "Growls");
-		
-//		this.animalName = animalName;
-//		this.animalAge = ageOfAnimal;
-//		this.animalWeight = weightOfAnimal;
-//		soundOfAnimal = "Growls";
+
 	}
 }

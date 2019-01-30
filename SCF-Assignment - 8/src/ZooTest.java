@@ -1,110 +1,103 @@
 import static org.junit.Assert.*;
-import org.junit.Test;
+import org.junit.runners.MethodSorters;
+import org.junit.FixMethodOrder;
 
+import org.junit.Test;
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ZooTest {
 
-	Zoo zoo = new Zoo(5);
-    // Adding a new Zone for Mammals which has Canteen and Park both
+	Zoo zoo = new Zoo(5); // initializing zoo with 5 zones
 	@Test
-    public void addZoneTest() 
+    public void firstTest()throws Exception 
     {
-		assertTrue(zoo.addZone( Utility.typeMammal,10, true, true));
-	}
-
-    // Adding a new Cage for Lion in Zone1 which has a Capacity of 5 Lion
-	@Test
-    public void addCageTest() throws Exception
-    {
-		assertTrue(zoo.addCage("Lion",Utility.typeMammal, 5));
-	}
-
-    // Adding peacock-4 in Cage3 whose age is 2years and weight is 8kgs
-	@Test
-    public void addAnimalTest() throws Exception
-     {
-		
-		assertTrue(new Zoo().addAnimal("peacook-4", Utility.typePeacock, 2, 8, 3));
-	}
-
-    // Providing CategoryOfAnimal as Null
-	@Test(expected = AssertionError.class)
-    public void addZoneWithNullCategory()
-    {
-		
-		try {
-			new Zoo().addZone(10, null, true, true);
-		} catch (Exception ex) {
-			assertEquals("Category Of Animal in Zone Can't be Null",
-					ex.getMessage());
-		}
-	}
-
-    // Providing CategoryOfAnimal as Null
-	@Test(expected=AssertionError.class)
-    public void addCageWithNullCategory() throws Exception 
-    {
-		
-			new Zoo().addCage(null, 4, 5);
+			
 		
 		
+			//adding the zone mammal type in zoo
+			assertTrue(zoo.addZone( Utility.typeMammal,3, true, true));
+			
+			
+			
+			//adding the cage in the zone mammal
+			assertTrue(zoo.addCage("Lion", Utility.typeMammal, 2));
+			
+			
+			
+			//adding of two animals in cage created above
+			assertTrue(zoo.addAnimal(new Lion("Lion1" , 10 , 40)));
+			assertTrue(zoo.addAnimal(new Lion("Lion2" , 16 , 50)));
+			
+			
+			
+			//here new cage will be allocated automatically on zone mammal of type elephant
+			assertTrue(zoo.addAnimal(new Elephant("elephant-1" , 12 , 40)));
+			
+			
+			// will show the message to add the zone as zone of bird is not added in Zoo
+			try
+			{
+				assertFalse(zoo.addAnimal(new Sparrow("Sparrow-1" ,10 ,13)));
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage()); 
+			}
+			
+			
+			
+			//adding zone of bird type in zoo
+			assertTrue(zoo.addZone(Utility.typeBird , 2 , true , false));
+			
+			
+			
+			// animal will be added in zoo as zone of bird is present
+			try
+			{
+				assertTrue(zoo.addAnimal(new Sparrow("Sparrow-1" ,10 ,13))); 
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+			
+			
+			
+			// will show the message to add the zone as zone of snake is not added in Zoo
+			try
+			{
+				assertTrue(zoo.addAnimal(new Snake("Snake-1" ,10 ,13)));
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage()); 
+			}
+			
+			
+			//adding zone of reptile in zoo
+			assertTrue(zoo.addZone(Utility.typeReptile, 2, false, true));
+			
+			
+			//adding cage of type snake in zone reptile in zoo
+			assertTrue(zoo.addCage("Snake", Utility.typeReptile, 3));
+			
+			// snake will be added in the cage as the zone of type reptile is present
+			try
+			{
+				assertTrue(zoo.addAnimal(new Snake("Snake-1" ,10 ,13)));
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage()); 
+			}
+			
+			
+			//remove the animal lion from the cage
+			assertTrue(zoo.removeAnimal(new Lion("Lion1" , 10 , 40)));
+			
+			//Returning false because elephant is not present in the zoo
+			assertFalse(zoo.removeAnimal(new Elephant("elephant" ,20,30)));
+			
 	}
 
-    // Providing CategoryOfAnimal as Null and Name of Animal as Zero length
-	@Test(expected=AssertionError.class)
-    public void addAnimalWithNullCategoryORName() throws Exception 
-    {
-	
-			new Zoo().addAnimal(null, Utility.typeLion, 5, 34, 1);
-	
-	}
-
-    // Adding Cage in a Full Zone i.e., No cage could be Added in this Zone
-	@Test
-    public void addCageInFullZone()
-    {
-        try 
-        {
-			new Zoo().addCage(Utility.typeCrocodile, 3, 5);
-		} catch (Exception ex) {
-			assertEquals("Zone is Full", ex.getMessage());
-		}
-	}
-
-    // Adding Animal of Different Type to another Type of Cage i.e., Parrot
-	@Test
-    public void addAnimalWithDifferentTypeOfAnimal()
-    {
-		try {
-			new Zoo().addAnimal("Parrot-4", Utility.typePeacock, 3, 20.5, 2);
-		} catch (Exception ex) {
-			assertEquals("This cage is not for the given type of Animal",
-					ex.getMessage());
-		}
-
-	}
-
-    // Adding Animal to a Full Cage i.e., Adding Snake to Cage 6 which is
-		// already Full
-	@Test
-    public void addAnimalWithCageFull() 
-    {
-		try {
-			new Zoo().addAnimal("Snake-4", Utility.typeCrocodile, 3, 20.5, 6);
-		} catch (Exception ex) {
-			assertEquals("Cage is Full, Can't add more animals",
-					ex.getMessage());
-		}
-	}
-
-    // Adding a new Animal whose Name is already in the System
-	@Test
-    public void addAnimalWithSameName()
-    {
-		try {
-			new Zoo().addAnimal("Lion-1", Utility.typeLion, 20, 200, 1);
-		} catch (Exception ex) {
-			assertEquals("Animal Name should be Unique",
-					ex.getMessage());
-		}
-	}
+   
 }

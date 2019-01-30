@@ -3,36 +3,33 @@ import java.util.List;
 
 /*
 *  Zoo class provides multiple number of zone 
-*  It provide the function to add animal in cage 
-*  It provide the function to delete a animal
+*  It provide the function to add animal in cage and also if cage is not added it will automatically add cage w.r.t available 
+*  			cage for the category of animal zone. 
+*  It provide the function to delete a animal 
+*  It provide function to add zone for a particular category of animal
+*  It provide function to add cage for a particular zone.
 */
 
 public class Zoo {
 	
-	int maxNumberOfZone;
-	int presentZone = 0;
+	int maxNumberOfZone;		//to assign the maximum number of zone in the Zoo
+    int occupiedZone;		//to hold the occupied zone in the zoo
 	
-	public List<Zone> zoneList = new ArrayList<Zone>();
+	public List<Zone> zoneList = new ArrayList<Zone>();		//list of zones available in the zoo 
 	
+	
+	//parameterized constructor to assign the maximum number of zones in the zoo 
 	Zoo(int max)
 	{
 		maxNumberOfZone = max;
+	    this.occupiedZone = 0;
 	}
-
-	/**
-	 * Prints the all the Animal Names in Zoo
-	 */
-//    void getAllAnimal() 
-//    {
-//        for (int i = 0; i < cage.animalList.size(); i++) 
-//        {
-//			System.out.println(cage.animalList.get(i).getAnimalName());
-//		}
-//	}
 
     /*
     * addZone method to add a zone in zoo
-    * @return true if added successfully
+    * @param requires categoryOfAnimal should not be null otherwise @throws an exception
+    * @param requires maxNumberOfCages to be in particular zone
+    * @return true if added successfully and false if not.
     */
     boolean addZone( String categoryOfAnimal,int maxNoOfCages, boolean hasCanteen, boolean hasPark)
     {
@@ -40,11 +37,13 @@ public class Zoo {
         {
 			throw new AssertionError();
 		}
-        if(presentZone < maxNumberOfZone)
+        
+        //checks for the available space in the zoo for the zone
+        if(occupiedZone < maxNumberOfZone)
         {
         	Zone newZone = new Zone(categoryOfAnimal,maxNoOfCages, hasCanteen, hasPark);
     		zoneList.add(newZone);
-    		presentZone += 1;
+    		occupiedZone += 1;
     		return true;
         }
         else
@@ -54,7 +53,10 @@ public class Zoo {
 
     /*
     * addCage method to add a new Cage in a zone
-    * return true if added successfully
+    * @param requires typeOfAnimal (Lion, Peacock, etc.)
+    * @param requires categoryOfAnimal (Mammal, Reptile, etc)
+    * @requires maxNoOfAnimals which can be added in cage.
+    * return true if added successfully or @throws an exception if Zone not find
     */
     boolean addCage(String typeOfAnimal, String categoryOfAnimal, int maxNoOfAnimals) throws Exception
     {
@@ -68,86 +70,74 @@ public class Zoo {
         {
 			throw new AssertionError("null");
 		}
-        
-        for(int index=0;index<zoneList.size();index++)
+
+        for(int index=0;index<occupiedZone;index++)
         {	
-        	if(zoneList.get(index).getCategoryOfAnimal().equals(categoryOfAnimal) && zoneList.get(index).maxNoOfCages > zoneList.get(index).occupiedCage)
-        	{    
+        	//find the zone of the input available category
+        	if(zoneList.get(index).getCategoryOfAnimal().equals(categoryOfAnimal) )
+        	{   
+        		//return true if cage is added to the zone
         		return zoneList.get(index).addCage(new Cage(typeOfAnimal,categoryOfAnimal,maxNoOfAnimals));
         		 
         	}
-        	/*else{
-        		System.out.println("Zone is full");
-        	}*/
         }
         
+        //throws an exception if zone is not found
         throw new Exception("Please add zone first");
-        
-		
+      
 	}
 
-
     
-     //addAnimal method add a new animal to zoo with its specified cage and zone
+     /*
+      * addAnimal method add a new animal to zoo with its specified cage and zone
+      * @param requires object of animal type. It will add cage automatically if cage is available in zone 
+      * @return true if animal is added or @throws an exception if zone is not found or zone is full 
+      */
     
 	boolean addAnimal(Animal animal) throws Exception
     {
-		boolean flag;
+		boolean flag=false;
         // if name or type of animal found null throw assertion error
         if (animal.getAnimalName() == null || animal.getAnimalName().length() == 0) 
         {
 			throw new AssertionError();
         }
         //check for duplicate name if found throw exception of same name
+        Zone zone;
+        int maximumCages=0;
 		for (int i = 0; i < zoneList.size(); i++) 
 		{	
-			Zone zone = zoneList.get(i);
+			zone = zoneList.get(i);
+			maximumCages = zone.maxNoOfCages;
+			
+			//it will check for the zone is available for input type of animal or not
 			if(zone.categoryOfAnimal.equals(animal.getClass().getSuperclass().getSimpleName()))
 			{
+				flag=true;
 				for(int j=0;j<zone.cageList.size();j++)
 				{
 					Cage cage = zone.cageList.get(j);
-					if(cage.typeOfAnimal.equals(animal.getClass().getSimpleName()) && cage.maxNoOfAnimals > cage.noOfAnimals )
-					{
-						return zone.cageList.get(j).addAnimal(animal);
-					}
-					/*else
-					{
-						throw new Exception("add Cage First");
-					}*/
-				}
-				
-				/*System.out.println(zone.presentCage);
-				Cage newCage = new Cage(animal.getClass().getSimpleName() , animal.getClass().getSuperclass().getSimpleName() , 2);
-				if(zone.addCage(newCage))
-				{
-					System.out.println("Hello");
-					if(newCage.animalList.add(animal)) System.out.println("Animal Added");
-				}*/
-			}
-		}
-		if(this.addCage(animal.getClass().getSimpleName(), animal.getClass().getSuperclass().getSimpleName(), 2))
-		{
-			System.out.println("New Cage Created");
-		for (int i = 0; i < zoneList.size(); i++) 
-		{	
-			Zone zone = zoneList.get(i);
-			if(zone.categoryOfAnimal.equals(animal.getClass().getSuperclass().getSimpleName()))
-			{
-				for(int j=0;j<zone.cageList.size();j++)
-				{
-					Cage cage = zone.cageList.get(j);
-					if(cage.typeOfAnimal.equals(animal.getClass().getSimpleName()) && cage.maxNoOfAnimals > cage.noOfAnimals )
-					{
-						return zone.cageList.get(j).addAnimal(animal);
-						
-					}
 					
+					//it will check for the animal present in cage is of same type as of input
+					if(cage.typeOfAnimal.equals(animal.getClass().getSimpleName()) && cage.maxNoOfAnimals > cage.noOfAnimals )
+					{
+						return zone.cageList.get(j).addAnimal(animal);
+					}
 				}
-				
-				
 			}
 		}
+		
+		if(!flag)
+		{
+			throw new Exception("Please Add Zone First");
+		}
+		
+		
+		//it will automatically add cage in the zone if the space is available by calling addCage method
+		if(this.addCage(animal.getClass().getSimpleName(), animal.getClass().getSuperclass().getSimpleName(), maximumCages))
+		{			
+			//recursively call the add animal method if cage can be added to the zone.
+			 return addAnimal(animal);
 		}
 		
 		return false;
@@ -155,92 +145,40 @@ public class Zoo {
 	}
 		
     
-    //deathOfAnimal method to delete a animal from zoo 
+    /*
+     * deathOfAnimal method to delete a animal from zoo
+     * @param requires an animal object 
+     * @return true if animal is deleted. 
+     */
     
-    boolean deathOfAnimal(Animal animal) throws Exception
+    boolean removeAnimal(Animal animal) throws Exception
     {
         if(animal.getAnimalName() == null || animal.getAnimalName().length() == 0) 
         {
 			throw new AssertionError();
         }
-        //check for duplicate name if found throw exception of same name
+       
 		for (int i = 0; i < zoneList.size(); i++) 
 		{	
 			Zone zone = zoneList.get(i);
+			
+			//find the zone of the input available category
 			if(zone.categoryOfAnimal.equals(animal.getClass().getSuperclass().getSimpleName()))
 			{
 				for(int j=0;j<zone.cageList.size();j++)
 				{
 					Cage cage = zone.cageList.get(j);
+					
+					//find the cage of input animal type
 					if(cage.typeOfAnimal.equals(animal.getClass().getSimpleName()) )
 					{
 						return zone.cageList.get(j).deathAnimal(animal);
 						
 					}
-					/*else
-					{
-						System.out.println("Animal not found");
-						throw new Exception("add Cage First");
-					}*/
-				}
-				
-			}
-			
-		}
-		return false;
-	}
-
-	public static void main(String[] args)
-		{
-			Zoo z = new Zoo(2);
-			z.addZone("Mammal", 3, true, false);
-			z.addZone("Mammal", 1, true, false);
-			//z.addZone("Bird", 3, true, true);
-			try{
-				z.addCage("Lion", "Mammal",2);
-				//z.addCage("Peacock", "Bird", 3);
-				
-			    System.out.println(z.addAnimal(new Lion("lion-1",5,100)));
-				System.out.println(z.addAnimal(new Lion("lion-2",4,67)));
-				System.out.println(z.addAnimal(new Lion("lion-3",3,34)));
-				System.out.println(z.addAnimal(new Lion("lion-4",3,34)));
-				System.out.println(z.addAnimal(new Lion("lion-5",3,34)));
-				System.out.println(z.addAnimal(new Lion("lion-6",3,34)));
-				//System.out.println(z.addAnimal(new Peacock("Peacock-1", 10, 20)));
-				System.out.println(z.addAnimal(new Lion("lion-7",3,34)));
-				System.out.println(z.addAnimal(new Lion("lion-7",3,34)));
-				
-				
-				
-			}
-			catch(Exception e)
-			{
-				System.out.println(e.getMessage());
-			}
+				}	
+			}	
 		}
 		
-    
-	// void addSomeAnimal() {
-
-	// 	z.addZone("Mammal",4,true,true);
-	// 	z.addZone("Reptile",2,false,true);
-	// 	z.addZone("Bird",5,true,true);
-
-	// 	z.addCage
-	// 	zone.cageList.add(new Cage(3, Utility.typeLion, 1, 5));
-	// 	zone.cageList.add(new Cage(2, Utility.typeLion, 1, 5));
-	// 	zone.cageList.add(new Cage(3, Utility.typePeacock, 2, 5));
-	// 	zone.cageList.add(new Cage(2, Utility.typePeacock, 2, 2));
-	// 	zone.cageList.add(new Cage(2, Utility.typeCrocodile, 3, 5));
-	// 	zone.cageList.add(new Cage(3, Utility.typeCrocodile, 3, 10));
-
-	// 	cage.animalList.add(new Lion("Lion-1", 5, 80, 1));
-	// 	cage.animalList.add(new Lion("Lion-2", 15, 152, 1));
-	// 	cage.animalList.add(new Lion("Lion-3", 10, 102, 1));
-	// 	cage.animalList.add(new Peacock("peacook-1", 8, 1, 3));
-	// 	cage.animalList.add(new Peacock("peacook-2", 10, 1.5, 3));
-	// 	cage.animalList.add(new Peacock("peacook-3", 12, 2, 3));
-	// 	cage.animalList.add(new Crocodile("Crocodile-1", 15, 200, 5));
-	// 	cage.animalList.add(new Crocodile("Crocodile-2", 20, 250, 5));
-	// }
+		return false;
+	}		
 }

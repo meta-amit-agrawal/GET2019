@@ -1,5 +1,5 @@
 /*
-* Lion class is the subclass of Mammal class
+* Lion class is the subclass of Mammal class and also inherits the properties of Animal class
 */
 
 class Lion extends Mammal {
@@ -7,13 +7,10 @@ class Lion extends Mammal {
     /*
     * Parameterized constructor to initialize Lion attribute
     */
-	Lion(String animalName, int ageOfAnimal, double weightOfAnimal) {
+	Lion(String animalName, int ageOfAnimal, double weightOfAnimal)
+	{
 		
 		super(animalName , ageOfAnimal , weightOfAnimal , "Roars");
-		
-//		this.animalName = animalName;
-//		this.animalAge = ageOfAnimal;
-//		this.animalWeight = weightOfAnimal;
-//		soundOfAnimal = "Roars";
+
 	}
 }
