@@ -15,6 +15,8 @@ public interface Shape {
 	
 	public Shape.VariousShape getShape();
 	
+	public double originDistance();
+	
 	
 	enum VariousShape
 	{
