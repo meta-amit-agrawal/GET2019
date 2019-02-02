@@ -64,10 +64,20 @@ public class Triangle implements Shape
         point3=new Point(originPoint.getxPoint(),originPoint.getyPoint()+height);
         double subArea1,subArea2,subArea3;
         
+        double x1,x2,x3,y1,y2,y3,x,y;
+        x=point.getxPoint();
+        y=point.getyPoint();
+        x1= point1.getxPoint();
+        y1=point1.getyPoint();
+        x2= point2.getxPoint();
+        y2=point2.getyPoint();
+        x3= point3.getxPoint();
+        y3=point3.getyPoint();
+        
         //calculating area of the sub triangles formed by joining the coordinates of the triangle  
-        subArea1=subArea(point1.getxPoint(),point2.getxPoint(),point.getxPoint(),point1.getyPoint(),point2.getyPoint(),point.getyPoint());
-        subArea2=subArea(point2.getxPoint(),point3.getxPoint(),point.getxPoint(),point2.getyPoint(),point3.getyPoint(),point.getyPoint());
-        subArea3=subArea(point1.getxPoint(),point3.getxPoint(),point.getxPoint(),point1.getyPoint(),point3.getyPoint(),point.getyPoint());
+        subArea1=subArea(x1 , x2 , x , y1 , y2 , y );
+        subArea2=subArea(x2 , x3 , x , y2 , y3 , y );
+        subArea3=subArea(x1 , x3 , x , y1 , y3 , y);
 		
 		
 		return (getArea()==subArea1+subArea2+subArea3);
@@ -79,7 +89,7 @@ public class Triangle implements Shape
 	 */
 	private double subArea(double x1 , double x2 , double x3 , double y1 , double y2 , double y3)
 	{
-		return ((x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2))/2);
+		return Math.abs((x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2))/2);
 	}
 
 	/*

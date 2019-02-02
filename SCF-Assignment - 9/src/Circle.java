@@ -24,7 +24,7 @@ public class Circle implements Shape
 	@Override
 	public double getArea() {
 		
-		return Utility.PI*Math.pow(radius, 2);
+		return Math.PI*Math.pow(radius, 2);
 		
 	}
 
@@ -34,7 +34,7 @@ public class Circle implements Shape
 	@Override
 	public double getPerimeter() {
 		
-		return 2*Utility.PI*radius;
+		return 2*Math.PI*radius;
 		
 	}
 
