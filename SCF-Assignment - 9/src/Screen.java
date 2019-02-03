@@ -64,8 +64,7 @@ public class Screen
 			
 			//getting the object from the factory class
 			Shape shapeType = ShapeFactory.getShapeObject(shape,originPoint,parameterList,getMaxScreen());
-			if(shapeList.add(shapeType))
-			System.out.println("Added");
+			shapeList.add(shapeType);
 			return true;
 		
 	}
@@ -91,7 +90,6 @@ public class Screen
 			throw new Exception("Shape Not found");
 		
 		shapeList.remove(foundShape);
-		System.out.println("Deleted");
 		return true;
 		
 	}
@@ -125,7 +123,6 @@ public class Screen
 		for(Shape s : deleteShape)
 		{
 			shapeList.remove(s);
-			System.out.println("Deleted");
 		}
 		
 		return true;
@@ -155,7 +152,7 @@ public class Screen
 		default:
 			throw new Exception("Invalid choice");
 		}
-		return null;
+		return shapeList;
 	}
 	
 	/*

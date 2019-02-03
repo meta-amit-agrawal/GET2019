@@ -139,7 +139,7 @@ public class ScreenTest
 		try {
 			List<Shape> result = screen.sortList("perimeter");
 			for(int i=0;i<result.size();i++)
-				System.out.println(result.get(i).getShape()+"  "+result.get(i).getArea());
+				System.out.println(result.get(i).getShape()+"  "+result.get(i).getPerimeter());
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -151,7 +151,7 @@ public class ScreenTest
 		try {
 			List<Shape> result = screen.sortList("origin");
 			for(int i=0;i<result.size();i++)
-				System.out.println(result.get(i).getShape()+"  "+result.get(i).getArea());
+				System.out.println(result.get(i).getShape()+"  "+result.get(i).originDistance());
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -163,7 +163,7 @@ public class ScreenTest
 		try {
 			List<Shape> result = screen.sortList("timestamp");
 			for(int i=0;i<result.size();i++)
-				System.out.println(result.get(i).getShape()+"  "+result.get(i).getArea());
+				System.out.println(result.get(i).getShape()+"  "+result.get(i).getTimeStamp());
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -175,11 +175,18 @@ public class ScreenTest
 		try {
 			List<Shape> result = screen.sortList("");
 			for(int i=0;i<result.size();i++)
-				System.out.println(result.get(i).getShape()+"  "+result.get(i).getArea());
+				System.out.println(result.get(i).getShape());
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());		//error message will be printed
 		}
+		
+		
+		//test case of checking shape which are enclosing a point
+		Point point = new Point(5,3);
+		List<Shape> result = screen.shapeEnclosingPoint(point);
+		for(int i=0;i<result.size();i++)
+			System.out.println(result.get(i).getShape());
 		
 	}
 }
