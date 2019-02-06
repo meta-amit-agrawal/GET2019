@@ -9,6 +9,7 @@ body{
     background: url("../images/bodybg.png");
 }
 
+/* This section do the styling of navigation bar*/
 a,a:link,a:active,a:visited{
     color: black;
     text-decoration: none;
@@ -25,13 +26,11 @@ ul li{
 
 #header nav {
     flex: 1;
-  
 }
  
 #header nav ul li{
     display: inline;    
 }
-
 
 header nav ul li a:hover{
     background: #fff;
@@ -41,7 +40,6 @@ header nav ul li a:hover{
 #header nav ul li a{
  display: inline-block;
 color: #fff;
-
 padding: 10px;
 transition: 1s;
 border-radius: 5px;
@@ -52,20 +50,6 @@ border-radius: 5px;
     padding: 10px 0;
     padding-left: 20px;
 }
-
-
-
-/* #header nav ul li:nth-child(2) a {
-    background: #f96;
-    border-bottom: solid 3px #d74;
-} */
-
-/* #header nav ul li a:active {
-    border:0;
-    margin-top: 3px; 
-} */
-
-
 
 #header .socialWebPage ul li {
     display: inline-block;
@@ -86,6 +70,8 @@ border-radius: 5px;
     margin-left: 180px;
     height: 18px;
 }
+
+/* This section do the styling of the Cover part*/
 
 #cover {
     background: url("../images/homebg.png");
@@ -124,22 +110,17 @@ border-radius: 5px;
     color: #fff;
 }
 
+/* This section do the styling of Features section*/
+
 #features{
     margin-top: 60px;
     
 }
-/* 
-#features .heading1{
-    text-align: center;
-    font-size: 30px;
-    color: #69f;
-    padding: 10px 10px 20px 10px;
-} */
 
+/* This section will do the styling of subscript part of all section*/
 .subscript{
     color: #999;
-    text-align: center;
-    
+    text-align: center; 
 }
 
 #features .divFeatures{
@@ -201,12 +182,15 @@ border-radius: 5px;
     padding: 20px 10px 20px 15px;
 }
 
+/* This will do the styling of heading part of all section*/
 .heading1{
     text-align: center;
     font-size: 30px;
     color: #69f;
     padding: 10px 10px 20px 10px;
 }
+
+/*This will do the styling of screenshot section*/
 
 #screenshots .subscript{
     color: #999;
@@ -230,7 +214,7 @@ border-radius: 5px;
     padding: 20px 20px 20px 20px;
     margin-left: 200px;
     margin-top: 30px;
-    margin-right: 140px;
+    margin-right: 180px;
 }
 
 #screenshots .rainyScreenshot{
@@ -245,7 +229,7 @@ border-radius: 5px;
 }
 
 #screenshots .text{
-    font-size: 25px;
+    font-size: 23px;
     padding: 30px 0;
     color: #999;
 }
@@ -256,6 +240,136 @@ border-radius: 5px;
 }
 
 #screenshots .screenshotDesc{
-    padding: 10px 250px 10px 140px;
+    padding: 10px 400px 10px 100px;
 }
 
+#screenshots .screenshotDesc1{
+    padding: 10px 200px 10px 100px;
+}
+
+/* This will do the styling of review section*/
+
+#reviews {
+    margin: 40px 0;
+}
+
+#reviews .review1{
+    display: flex;
+    margin-left: 200px;
+    margin-right: 150px;
+}
+
+#reviews .review{
+    padding: 30px;
+    width: 600px;
+}
+
+#reviews .userReview{
+    font-size: 22px;
+    padding: 10px 10px 10px 10px;
+    font-weight: bold;
+}
+
+#reviews .userName{
+    font-size: 15px;
+    padding: 10px 10px 10px 10px;
+    color: #999;
+}
+
+#reviews .invertedComma{
+    font-size: 50px;
+    color: #69f
+}
+
+#reviews .invertedCommaEnd{
+    font-size: 50px;
+    color: #69f;
+    text-align: right;
+}
+
+/*This will do the styling of download the app section*/
+
+#downloadTheApp{
+    background: rgb(55, 117, 250); 
+    display: flex;
+}
+
+.downloadLink {
+    color: #fff;
+    padding: 120px 10px 10px 200px;
+}
+
+.downloadLink h1{
+    font-size: 40px;
+    
+}
+
+.downloadLink p{
+    font-size: 19px;
+    padding-top: 20px;
+    padding-right: 220px;
+}
+
+.downloadLink img{
+    padding-top: 20px;
+}
+
+.downloadImage{
+    padding-top: 50px;
+    padding-right: 100px;
+    height: 350px;
+}
+
+/*This will do the styling of footer section*/
+
+#sectionFooter{
+    background: #444;
+    padding:50px;
+}
+
+#footer{
+    display: flex;
+}
+
+.footerLogo{
+    height: 25px;
+    padding-left:30px;
+}
+
+.footerNavWebPage{
+    display: inline;   
+    flex:1;
+}
+
+.footerNavWebPage ul{
+    text-align: center;
+}
+
+.footerNavWebPage ul li{
+    display: inline-block;
+}
+
+.footerNavWebPage ul li a{
+    color: #fff;
+    display: inline-block;
+    padding: 0px 10px 10px 10px;
+}
+
+.footerSocialPage ul{
+    margin-right: 70px;
+}
+
+.footerSocialPage ul li{
+    display: inline-block;
+    padding: 0px 10px 0px 10px;
+}
+
+.footerSocialPage ul li a{
+    color: #fff;
+    padding-right:0px 20px;
+}
+
+.reserverd{
+    text-align: center;
+     font-size: 15px;
+}
