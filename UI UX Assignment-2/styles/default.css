@@ -98,7 +98,7 @@ border-radius: 5px;
     padding: 50px 0 50px 230px;
 
 }
-#cover .divCover .heading1{
+#cover .divCover .heading{
     font-size: 50px;
     padding: 30px 0 50px 0;
     color: #fff;
@@ -128,15 +128,15 @@ border-radius: 5px;
     margin-top: 60px;
     
 }
-
-#features .headingFeatures{
+/* 
+#features .heading1{
     text-align: center;
     font-size: 30px;
     color: #69f;
     padding: 10px 10px 20px 10px;
-}
+} */
 
-#features .subscript{
+.subscript{
     color: #999;
     text-align: center;
     
@@ -201,7 +201,7 @@ border-radius: 5px;
     padding: 20px 10px 20px 15px;
 }
 
-#screenshots .headingScreenshots{
+.heading1{
     text-align: center;
     font-size: 30px;
     color: #69f;
@@ -214,17 +214,48 @@ border-radius: 5px;
     
 }
 
+#screenshots {
+    margin: 20px 0;
+}
+
 #screenshots .cloudyScreenshot{
     display: flex;
     padding: 20px 20px 20px 20px;
+    margin-left: 250px;
+    margin-top: 30px;
 }
 
 #screenshots .sunnyScreenshot{
     display: flex;
     padding: 20px 20px 20px 20px;
+    margin-left: 200px;
+    margin-top: 30px;
+    margin-right: 140px;
 }
 
 #screenshots .rainyScreenshot{
     display: flex;
     padding: 20px 20px 20px 20px;
+    margin-left: 250px;
+    margin-top: 30px;
 }
+
+#screenshots h2{
+    font-size: 40px;
+}
+
+#screenshots .text{
+    font-size: 25px;
+    padding: 30px 0;
+    color: #999;
+}
+
+#screenshots .screenshotclassImage{
+    padding: 20px 20px 20px 20px;
+    margin: 20px 0;
+}
+
+#screenshots .screenshotDesc{
+    padding: 10px 250px 10px 140px;
+}
+
