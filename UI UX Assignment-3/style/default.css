@@ -13,7 +13,7 @@
     width: 100px;
 }
 
-/*This section defines the first square of the whole container of red color*/
+/*This section defines the first square of the whole container of light red (tomato) color*/
 #square1{
     background: tomato;
     animation-delay: 0s;
