@@ -87,25 +87,30 @@ removeElement()
 	var prev = null; 
 	var flag=0;
 
-	while (current != null) { 
-		
-		if (current.element === element) { 
-			if (prev == null) { 
-				this.head = current.next; 
-			} else { 
-				prev.next = current.next; 
-			} 
-			this.size--;
-			flag=1;
-		} 
-		prev = current; 
-		current = current.next; 
-	} 
-	if(flag==0){
-		alert("ELement Not found");
+	if(this.size == 0){
+		alert("List is Empty");
 	}
 	else{
-		this.printList();
+		while (current != null) { 
+		
+			if (current.element === element) { 
+				if (prev == null) { 
+					this.head = current.next; 
+				} else { 
+					prev.next = current.next; 
+				} 
+				this.size--;
+				flag=1;
+			} 
+			prev = current; 
+			current = current.next; 
+		} 
+		if(flag==0){
+			alert("ELement Not found");
+		}
+		else{
+			this.printList();
+		}
 	}
 	document.getElementById("getValue").value="";
 	
