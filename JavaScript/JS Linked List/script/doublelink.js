@@ -1,4 +1,5 @@
 class Node1{
+    //intializes the node with the data
     constructor(element){
         this.element = element;
         this.next = null;
@@ -7,12 +8,14 @@ class Node1{
 }
 
 class LinkedList1{
+    //constructor to intialize the Linked List
     constructor(){
         this.size = 0;
         this.head = null;
             
     }
 
+    //method to add the element at the specified position or at the end of the list
     addDouble(){
         var value = document.getElementById("getValueDouble").value;
         var position = document.getElementById("getPositionDouble").value;
@@ -20,15 +23,17 @@ class LinkedList1{
             alert("Element Can't be null");
         }
         else{
+            //it will add the element at the end of the list as the position is null
             if(position == ""){
 
                 var node = new Node1(value); 
 
+                //it node is the first element in the list
                 if(this.head == null){
                     this.head = node; 
                     this.size++;
-
                 }
+
                 else{
                     var currentNode = this.head;
                     while (currentNode.next != null) {
@@ -39,6 +44,7 @@ class LinkedList1{
                     this.size++;
                 }
             }
+            //this will add the element at the specified position
             else{
                 if(position <0 || position >this.size){
                     alert("Position is out of range!!");
@@ -48,6 +54,7 @@ class LinkedList1{
                     var curr , prev;
                     curr = this.head;
 
+                    //if node to be add at the first position
                     if(position == 0){
                         node.next=this.head;
                         this.head = node;
@@ -76,10 +83,12 @@ class LinkedList1{
         }
     }
 
+    //this method will delete the first element matched in the list
     deleteDouble(){
         var value = document.getElementById("getValueDouble").value;
         var current = this.head; 
-	    var prev = null; 
+        var prev = null; 
+        var flag=0;
         if(this.size == 0){
             alert("List is Empty");
         }
@@ -94,21 +103,26 @@ class LinkedList1{
                     if(current.next){
                         current.next.prev = current.prev;
                     }
-                    else{
-
-                    }
                     if(current.prev){
                         current.prev.next = current.next;
                     }
+                    //if the node is the first node
                     else{
                         this.head = current.next;
                         if(this.head){
                             this.head.prev = null;
                         }
                     }
+                    flag=1;
+                    break;
                 }
                 current = current.next;
             }
+
+            if(flag == 0){
+                alert("Element Not found");
+            }
+
         }
 
         document.getElementById("getValueDouble").value="";
@@ -116,17 +130,18 @@ class LinkedList1{
         this.printListDouble();
     }
 
-    printListDouble() 
-    { 
-	var curr = this.head; 
-	var str = ""; 
-	while (curr) { 
-		str += curr.element + " "; 
-		curr = curr.next; 
-    } 
-    if(str=="") alert("no element");
+    //prints the list with current elements in it
+    printListDouble() { 
+
+	    var curr = this.head; 
+	    var str = ""; 
+	    while (curr) { 
+		    str += curr.element + " "; 
+		    curr = curr.next; 
+        } 
+        if(str=="") alert("no element");
     
-	document.getElementById("resultDouble").innerHTML=str; 
+	    document.getElementById("resultDouble").innerHTML=str; 
     } 
 
 }
