@@ -5,13 +5,37 @@ import java.util.List;
 
 public class Cart {
 	
-	List<Product> cartProduct;
-	User user;
+	private List<Product> cartItem;
 	
-	public Cart(User user) {
+	public Cart() {
 		// TODO Auto-generated constructor stub
-		cartProduct = new ArrayList<Product>();
-		this.user = user;
+		cartItem = new ArrayList<Product>();
 	}
-
+	
+	public List<Product> getCartItem()
+	{
+		return cartItem;
+	}
+	
+	public Product getProductById(int product_id)
+	{
+		for(Product pro : cartItem)
+		{
+			if(pro.getProduct_code()==product_id)
+			{
+				return pro;
+			}
+		}
+		return null;
+	}
+	
+	public void addProduct(Product product)
+	{
+		cartItem.add(product);
+	}
+	
+	public void removeProduct(Product product)
+	{
+		cartItem.remove(product);
+	}
 }

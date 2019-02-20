@@ -1,28 +1,29 @@
 package com.metacube.shoppingcart.Dao;
 
+import java.util.List;
+
 import com.metacube.shoppingcart.Model.Cart;
-import com.metacube.shoppingcart.enums.status;
+import com.metacube.shoppingcart.Model.User;
 
-public class CartDao implements BaseDao<Cart> {
 
-	@Override
-	public void add(Cart entity) {
-		// TODO Auto-generated method stub
+public class CartDao  {
 
-	}
-
-	@Override
-	public void delete(Cart entity) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void update(Cart entity, Cart entity1) {
-		// TODO Auto-generated method stub
-	}
+	private UserDao userDao = UserDao.getInstance();
 	
-	public status modify(){
+	private List<User> userList = userDao.getAllUser();
+	
+	
+	public Cart getCart(int user_id)
+	{
+		for(User user : userList)
+		{
+			if(user.getUser_id() == user_id)
+			{
+				Cart cart = user.getCart();
+				return cart;
+			}
+		}
 		return null;
-	}
+	}	
 
 }

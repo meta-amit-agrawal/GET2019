@@ -29,5 +29,10 @@ public class UserController {
 		}
 		throw new Exception("User Not Exists");
 	}
+	
+	public List<User> getAllUser()
+	{
+		return userFacade.getAllUser();
+	}
 
 }

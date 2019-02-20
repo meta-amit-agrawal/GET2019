@@ -8,7 +8,7 @@ import com.metacube.shoppingcart.enums.status;
 
 public class UserFacade {
 	
-	UserDao userDao = new UserDao();
+	UserDao userDao = UserDao.getInstance();
 	List<User> existingUser = userDao.getAllUser();
 	
 	

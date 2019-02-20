@@ -8,7 +8,19 @@ import com.metacube.shoppingcart.Model.User;
 public class UserDao implements BaseDao<User> {
 	
 	
-	private List<User> userList = new ArrayList<User>();	
+	private List<User> userList = new ArrayList<User>();
+	
+	private static UserDao userDao_Object = null;
+	private UserDao(){	}
+	
+	public static UserDao getInstance()
+	{
+		if(userDao_Object == null)
+		{
+			userDao_Object = new UserDao();
+		}
+		return userDao_Object;
+	}
 	
 	public List<User> getAllUser()
 	{
@@ -37,6 +49,8 @@ public class UserDao implements BaseDao<User> {
 		index=userList.indexOf(user);
 		userList.add(index,updated);
 	}
+	
+	
 	
 
 }
