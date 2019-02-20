@@ -5,34 +5,19 @@ import java.util.List;
 
 import com.metacube.shoppingcart.Model.Product;
 
-public class ProductDao implements BaseDao<Product> {
+public class ProductDao {
 	
 	
 	List<Product> productList = new ArrayList<Product>();
 	
-	@Override
-	public void add(Product product) {
-		// TODO Auto-generated method stub
-		productList.add(product);
+	public ProductDao() {
+		// TODO Auto-generated constructor stub
+		productList.add(new Product(1, "furniture", "chair", 100, 5));
+		productList.add(new Product(1, "furniture", "table", 150, 6));
+		productList.add(new Product(1, "clothes", "shirt", 50, 3));
+		productList.add(new Product(1, "stationary", "pen", 10, 2));
+		productList.add(new Product(1, "stationary", "note-book", 20, 7));
 	}
-
-
-	@Override
-	public void delete(Product product) {
-		// TODO Auto-generated method stub
-		productList.remove(product);
-		
-	}
-
-
-	@Override
-	public void update(Product product,Product updated) {
-		// TODO Auto-generated method stub
-			int index;
-			index=productList.indexOf(product);
-			productList.add(index, updated);
-	}
-	
 	
 	public List<Product> getAllproducts()
 	{

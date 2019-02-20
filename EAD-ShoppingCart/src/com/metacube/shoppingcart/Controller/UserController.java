@@ -21,18 +21,15 @@ public class UserController {
 		throw new Exception("Duplicate User");
 	}
 	
-	public boolean deleteUser(User user) throws Exception
-	{
-		if(userFacade.deleteUser(user)==status.SUCCESSFULL)
-		{
-			return true;
-		}
-		throw new Exception("User Not Exists");
-	}
 	
 	public List<User> getAllUser()
 	{
-		return userFacade.getAllUser();
+		return  userFacade.getAllUser();
+	}
+	
+	public User getUserByID(int userID)
+	{
+		return userFacade.getUserByID(userID);
 	}
 
 }

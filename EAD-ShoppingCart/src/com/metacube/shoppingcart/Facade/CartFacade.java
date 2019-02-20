@@ -18,17 +18,25 @@ public class CartFacade {
 	public status addProductToCart(int userId, Product product)
 	{
 		Cart cart = cartDao.getCart(userId);
-		Product pro = cart.getProductById(product.getProduct_code());
-		if(pro!=null)
+		if(cart!=null)
 		{
-			pro.setProduct_qty(pro.getProduct_qty()+product.getProduct_qty());
-			return status.SUCCESSFULL;
+			Product pro = cart.getProductById(product.getProduct_code());
+			if(pro!=null)
+			{
+				pro.setProduct_qty(pro.getProduct_qty()+product.getProduct_qty());
+				return status.SUCCESSFULL;
+			}
+			else
+			{
+				cart.addProduct(product);
+				return status.SUCCESSFULL;
+			}
 		}
-		else
+		else 
 		{
-			cart.addProduct(product);
-			return status.SUCCESSFULL;
+			return status.NOTEXISTS;
 		}
+		
 	}
 	
 	public status deleteProductFromCart(int userId, Product product)

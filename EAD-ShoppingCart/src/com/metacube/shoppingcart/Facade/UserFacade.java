@@ -43,5 +43,17 @@ public class UserFacade {
 		return userDao.getAllUser();
 	}
 	
+	public User getUserByID(int id)
+	{
+		for(User u : existingUser)
+		{
+			if(u.getUser_id() == id)
+			{
+				return u;
+			}
+		}
+		return null;
+	}
+	
 
 }
