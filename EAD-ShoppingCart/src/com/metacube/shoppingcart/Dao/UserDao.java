@@ -5,14 +5,17 @@ import java.util.List;
 
 import com.metacube.shoppingcart.Model.User;
 
-public class UserDao implements BaseDao<User> {
+public class UserDao {
 	
 	
 	private List<User> userList = new ArrayList<User>();
 	
 	private static UserDao userDao_Object = null;
+	
+	//to make the class singleton
 	private UserDao(){	}
 	
+	//returns the object of UserDao class
 	public static UserDao getInstance()
 	{
 		if(userDao_Object == null)
@@ -22,33 +25,19 @@ public class UserDao implements BaseDao<User> {
 		return userDao_Object;
 	}
 	
+	//returns the list of all available users
 	public List<User> getAllUser()
 	{
 		return userList;
 	}
-
-
-	@Override
+	
+	//add the user in the list of users
 	public void add(User user) {
-		// TODO Auto-generated method stub
 		userList.add(user);
 	}
 
 
-	@Override
-	public void delete(User user) {
-		// TODO Auto-generated method stub
-		userList.remove(user);
-	}
 
-
-	@Override
-	public void update(User user, User updated) {
-		// TODO Auto-generated method stub
-		int index;
-		index=userList.indexOf(user);
-		userList.add(index,updated);
-	}
 	
 	
 	

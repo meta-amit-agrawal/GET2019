@@ -11,23 +11,40 @@ public class CartFacade {
 	
 	
 	CartDao cartDao = new CartDao();
+	ProductFacade productFacade = new ProductFacade();
+	
+	/*
+	 * addProductToCart method add the given quantity of the product to the cart
+	 * @param requires the userID, object of product, and productQty to update the data
+	 * @return the enum Successful is product is updated
+	 */
+	
 	
 	public status addProductToCart(int userId, Product product, int productQTY)
 	{
 		Cart cart = cartDao.getCart(userId);
 		if(cart!=null)
 		{
-			Product pro = cart.getProductById(product.getProduct_code());
-			if(pro!=null)
+			//checks the product quantity is available in the store
+			if(productFacade.isAvailQuantity(product.getProduct_code(), productQTY))
 			{
-				pro.setProduct_qty(pro.getProduct_qty()+product.getProduct_qty());
+				//checks if product is already available in the cart
+				Product pro = cart.getProductById(product.getProduct_code());
+				if(pro!=null)
+				{
+					pro.setProduct_qty(pro.getProduct_qty()+productQTY);
+				}
+				else
+				{
+					Product newProduct = new Product(product.getProduct_code(), product.getProduct_type(), product.getProduct_name(), product.getProduct_price(), productQTY);
+					cart.addProduct(newProduct);
+				}
+				
+				//updates the quantity in the store
+				productFacade.updateProduct(product.getProduct_code(), productQTY);
 				return status.SUCCESSFULL;
 			}
-			else
-			{
-				cart.addProduct(product);
-				return status.SUCCESSFULL;
-			}
+			return status.NOTSUCCESSFULL;
 		}
 		else 
 		{
@@ -36,20 +53,30 @@ public class CartFacade {
 		
 	}
 	
-	public status deleteProductFromCart(int userId, Product product)
+	/*
+	 * deleteProductFromCart delete the given quantity of the product from the cart
+	 * @param requires the userID, object of product, and productQty to update the data
+	 * @return the enum Successful is product is updated
+	 */
+	
+	public status deleteProductFromCart(int userId, Product product, int productQTY)
 	{
 		Cart cart = cartDao.getCart(userId);
 		Product pro = cart.getProductById(product.getProduct_code());
 		if(pro!=null)
 		{
-			if(pro.getProduct_qty() == product.getProduct_qty())
+			//checks if quantity is same, if same then remove the product form cart
+			if(pro.getProduct_qty() == productQTY)
 			{
 				 cart.removeProduct(pro);
+				 productFacade.addProduct(product.getProduct_code(), productQTY);
 				 return status.SUCCESSFULL;
 			}
-			else if(pro.getProduct_qty() > product.getProduct_qty())
+			//checks if quantity if greater than input, if greater then updates the quantity in the cart 
+			else if(pro.getProduct_qty() > productQTY)
 			{
-				pro.setProduct_qty(pro.getProduct_qty() - product.getProduct_qty());
+				pro.setProduct_qty(pro.getProduct_qty() - productQTY);
+				productFacade.addProduct(product.getProduct_code(), productQTY);
 				return status.SUCCESSFULL;
 			}
 			else
@@ -60,6 +87,11 @@ public class CartFacade {
 		return status.NOTEXISTS;
 	}
 	
+	/*
+	 * getCartList method returns the list of the products available in the cart
+	 * @param requires the userID
+	 * @returns the list of the products available in the cart 
+	 */
 	public List<Product> getCartList(int user_id)
 	{
 		Cart cart = cartDao.getCart(user_id);

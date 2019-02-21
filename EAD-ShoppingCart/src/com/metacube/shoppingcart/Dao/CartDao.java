@@ -12,6 +12,11 @@ public class CartDao  {
 	
 	private List<User> userList = userDao.getAllUser();
 	
+	/*
+	 *getCart method finds the cart of the given userID
+	 *@param requirse the userID
+	 *@returns the reference of cart of given userID
+	 */
 	
 	public Cart getCart(int user_id)
 	{
@@ -25,9 +30,5 @@ public class CartDao  {
 		}
 		return null;
 	}
-	
-	
-	
-	
 
 }

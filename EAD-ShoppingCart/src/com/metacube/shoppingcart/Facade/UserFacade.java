@@ -9,42 +9,42 @@ import com.metacube.shoppingcart.enums.status;
 public class UserFacade {
 	
 	UserDao userDao = UserDao.getInstance();
-	List<User> existingUser = userDao.getAllUser();
 	
-	
+	/*
+	 * addUser method to add the new user 
+	 * @param requires the object user to add in the list
+	 * @returns enums successful if user is added in list or duplicate if if user of same id already exists
+	 */
 	public status addUser(User user)
 	{
-		for(User u : existingUser)
+		User u = getUserByID(user.getUser_id());
+		//user doesn't exist in list
+		if(u==null)
 		{
-			if(u.getUser_id()==user.getUser_id())
-			{
-				return status.DUPLICATE;
-			}
+			userDao.add(user);
+			return status.SUCCESSFULL;
 		}
-		userDao.add(user);
-		return status.SUCCESSFULL;
+		
+		//user of same id exist in the list
+		return status.DUPLICATE;
+		
 	}
 	
-	public status deleteUser(User user)
-	{
-		for(User u : existingUser)
-		{
-			if(u.getUser_id()==user.getUser_id())
-			{
-				userDao.delete(user);
-				return status.SUCCESSFULL;
-			}
-		}
-		return status.NOTEXISTS;
-	}
-	
+	//returns the list of all users available 
 	public List<User> getAllUser()
 	{
 		return userDao.getAllUser();
 	}
 	
+	
+	/*
+	 * getUserByID method returns the reference of the user of given user id
+	 * @param requires the user id
+	 * @returns the reference of the user of given user id
+	 */
 	public User getUserByID(int id)
 	{
+		List<User> existingUser = userDao.getAllUser();
 		for(User u : existingUser)
 		{
 			if(u.getUser_id() == id)

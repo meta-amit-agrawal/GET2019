@@ -6,12 +6,12 @@ import java.util.Scanner;
 import com.metacube.shoppingcart.Controller.CartController;
 import com.metacube.shoppingcart.Controller.ProductController;
 import com.metacube.shoppingcart.Controller.UserController;
-import com.metacube.shoppingcart.Model.Cart;
 import com.metacube.shoppingcart.Model.Product;
 import com.metacube.shoppingcart.Model.User;
 
 public class MenuView {
 	
+	//show the general menu options 
 	public void showMenu()
 	{
 		System.out.println("Choose the option below...");
@@ -20,25 +20,30 @@ public class MenuView {
 		System.out.println("Press any other key to exit");
 	}
 	
+	//shows the cart menu options
 	public void showCartMenu()
 	{
 		System.out.println("Choose the below cart option...");
 		System.out.println("1. Add Product to cart");
 		System.out.println("2. Update product to cart");
-		System.out.println("3. Logout");
+		System.out.println("3. Show Cart");
+		System.out.println("4. Logout");
 	}
 	
 	public static void main(String args[])
 	{
 		MenuView menuView = new MenuView();
 		menuView.showMenu();
+		
 		UserController userController = new UserController();
 		ProductController productController = new ProductController();
 		CartController cartController = new CartController();
 		
 		Scanner sc = new Scanner(System.in);
 		int menuChoice,cartChoice;
+		
 		menuChoice = sc.nextInt();
+		
 		while(menuChoice>0 && menuChoice<3)
 		{
 			switch(menuChoice)
@@ -51,12 +56,13 @@ public class MenuView {
 				try {
 					userController.addUser(new User(newuserId, newname));
 					System.out.println("Added");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				}
+				catch (Exception e) 
+				{
 					System.out.println("Error: "+e.getMessage());
 				}
-								
 				break;
+				
 			case 2:
 				System.out.println("Enter the id of the user");
 				int userID = sc.nextInt();
@@ -66,7 +72,7 @@ public class MenuView {
 					menuView.showCartMenu();
 					cartChoice = sc.nextInt();
 					
-					while(cartChoice>0 && cartChoice<4)
+					while(cartChoice>0 && cartChoice<5)
 					{
 						switch(cartChoice)
 						{
@@ -81,10 +87,16 @@ public class MenuView {
 							int proID = sc.nextInt();
 							System.out.println("Enter the quantity of the product...");
 							int proQty = sc.nextInt();
-							
+							try {
+								cartController.addProductToCart(userID, proID, proQty);System.out.println("Added");
+							} 
+							catch (Exception e) 
+							{
+								System.out.println(e.getMessage());
+							}
 							break;
-						case 2:
 							
+						case 2:
 							List<Product> cartList = cartController.getCartList(userID);
 							
 							for(int i=0;i<cartList.size();i++)
@@ -98,24 +110,41 @@ public class MenuView {
 							int productID = sc.nextInt();
 							System.out.println("Enter the Quantity of the product...");
 							int productQTY = sc.nextInt();
-							
+							try {
+								cartController.deleteProductFromCart(userID, productID, productQTY);
+							} 
+							catch (Exception e) 
+							{
+								System.out.println(e.getMessage());
+							}
 							
 							break;
 						case 3: 
+							
+							List<Product> cartL = cartController.getCartList(userID);
+							
+							for(int i=0;i<cartL.size();i++)
+							{
+								Product cartProduct = cartL.get(i);
+								System.out.println(cartProduct.getProduct_code()+"\t"+cartProduct.getProduct_name()+"\t"
+										+cartProduct.getProduct_price()+"\t"+cartProduct.getProduct_type()+"\t"+cartProduct.getProduct_qty());
+							}
+							
+							break;
+						case 4:
 							break;
 						default:
 							System.out.println("Invalid Choice!!");
 						}
 						
-						menuView.showCartMenu();
-						cartChoice = sc.nextInt();
-						if(cartChoice == 3)
+						if(cartChoice == 4)
 						{
 							break;
 						}
 						
+						menuView.showCartMenu();
+						cartChoice = sc.nextInt();
 					}
-					
 				}
 				else
 				{
@@ -123,19 +152,7 @@ public class MenuView {
 				}
 				break;
 			default:
-				
-				
-				
 				System.out.println("Invalid choice!!!");
-				
-			}
-			
-			
-			List<User> userList = userController.getAllUser();
-			
-			for(int i=0;i<userList.size();i++)
-			{
-				System.out.println(userList.get(i).getUser_id()+"  "+userList.get(i).getUser_name());
 			}
 			
 			System.out.println();
