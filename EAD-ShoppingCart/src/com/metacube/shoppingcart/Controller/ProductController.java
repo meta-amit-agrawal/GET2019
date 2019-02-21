@@ -16,4 +16,9 @@ public class ProductController
 		return productFacade.getStoreProduct();
 	}
 	
+	public Product getProductById(int productID)
+	{
+		return productFacade.getProductById(productID);
+	}
+	
 }
