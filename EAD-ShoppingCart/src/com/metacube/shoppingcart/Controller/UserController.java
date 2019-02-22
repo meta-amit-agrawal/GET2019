@@ -1,6 +1,5 @@
 package com.metacube.shoppingcart.Controller;
 
-import java.util.List;
 
 import com.metacube.shoppingcart.Facade.UserFacade;
 import com.metacube.shoppingcart.Model.User;
@@ -22,15 +21,6 @@ public class UserController {
 			return true;
 		}
 		throw new Exception("Duplicate User");
-	}
-	
-	/*
-	 * getAllUser method returns the list of all users available in the system
-	 * @returns the list of users
-	 */
-	public List<User> getAllUser()
-	{
-		return  userFacade.getAllUser();
 	}
 	
 	/*

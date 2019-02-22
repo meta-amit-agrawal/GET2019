@@ -30,13 +30,6 @@ public class UserFacade {
 		
 	}
 	
-	//returns the list of all users available 
-	public List<User> getAllUser()
-	{
-		return userDao.getAllUser();
-	}
-	
-	
 	/*
 	 * getUserByID method returns the reference of the user of given user id
 	 * @param requires the user id

@@ -32,6 +32,7 @@ public class MenuView {
 	
 	public static void main(String args[])
 	{
+		//displays the general menu
 		MenuView menuView = new MenuView();
 		menuView.showMenu();
 		
@@ -48,6 +49,7 @@ public class MenuView {
 		{
 			switch(menuChoice)
 			{
+			//add user 
 			case 1:
 				System.out.println("Enter the id of the user");
 				int newuserId = sc.nextInt();
@@ -63,6 +65,7 @@ public class MenuView {
 				}
 				break;
 				
+			//login user
 			case 2:
 				System.out.println("Enter the id of the user");
 				int userID = sc.nextInt();
@@ -76,6 +79,8 @@ public class MenuView {
 					{
 						switch(cartChoice)
 						{
+						
+						//add product to cart
 						case 1:
 							List<Product> store = productController.getStoreProduct();
 							for(int i=0;i<store.size();i++)
@@ -96,6 +101,7 @@ public class MenuView {
 							}
 							break;
 							
+						//update product to cart	
 						case 2:
 							List<Product> cartList = cartController.getCartList(userID);
 							
@@ -119,6 +125,8 @@ public class MenuView {
 							}
 							
 							break;
+							
+						//show the user cart
 						case 3: 
 							
 							List<Product> cartL = cartController.getCartList(userID);
