@@ -7,8 +7,11 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+	<!-- It will create the object of twitter class -->
 	
 	<bean id="twitter" class="com.metacube.messageservice.TwitterService"/>
+	
+	<!-- It will create the object of Email class -->
 	
 	<bean id="email" class="com.metacube.messageservice.EmailService"/>
 		
