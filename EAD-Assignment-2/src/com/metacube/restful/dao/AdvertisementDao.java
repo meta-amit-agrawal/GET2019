@@ -7,14 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.metacube.restful.enums.Status;
+import com.metacube.restful.enums.StatusEnums;
 import com.metacube.restful.model.Advertisement;
+import com.metacube.restful.model.CategoryAdvertsiement;
 
 public class AdvertisementDao {
 	
-	Connection connection=ConnectionToDB.getConnection();
+	private Connection connection=ConnectionToDB.getConnection();
 	
-	public Status addAvertisement(Advertisement advertisement) throws SQLException
+	public StatusEnums addAvertisement(Advertisement advertisement) throws SQLException
 	{
 		try 
 		{
@@ -25,17 +26,17 @@ public class AdvertisementDao {
 			preparedStatement.setInt(4, advertisement.getCategory_id());
 			if(preparedStatement.executeUpdate()>0)
 			{
-				return Status.INSERTED;
+				return StatusEnums.INSERTED;
 			}
 		}
 		catch (SQLException e) 
 		{
 			throw e;
 		}
-		return Status.NOTINSERTED;
+		return StatusEnums.NOTINSERTED;
 	}
 	
-	public Status deleteAdvertisement(int advertisementID)
+	public StatusEnums deleteAdvertisement(int advertisementID)
 	{
 		try 
 		{
@@ -43,20 +44,20 @@ public class AdvertisementDao {
 			preparedStatement.setInt(1, advertisementID);
 			if(preparedStatement.executeUpdate()>0)
 			{
-				return Status.DELETED;
+				return StatusEnums.DELETED;
 			}
 		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return Status.NOTDELETED;
+		return StatusEnums.NOTDELETED;
 		
 	}
 	
 	public List<Advertisement> getAllAdvertisement()
 	{
-		List<Advertisement> advertisementist = new ArrayList<Advertisement>();
+		List<Advertisement> advertisementList = new ArrayList<Advertisement>();
 		try 
 		{
 			PreparedStatement preparedStatement = connection.prepareStatement(Query.getAllAdvertisement);
@@ -64,19 +65,22 @@ public class AdvertisementDao {
 			while(resultSet.next())
 			{
 				Advertisement advertisement = new Advertisement(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("description"), resultSet.getInt("category_id"));
-				advertisementist.add(advertisement);
+				advertisementList.add(advertisement);
 			}
 		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return advertisementist;
+		System.out.println("Advertisement list returned "+advertisementList.size());
+		return advertisementList;
 	}
 	
-	public Advertisement getAdvertisementBycategoryID(int categoryID)
+	public CategoryAdvertsiement getAdvertisementBycategoryID(int categoryID)
 	{
+		List<Advertisement> advertisementList = new ArrayList<Advertisement>();
 		Advertisement advertisement = null;
+		CategoryAdvertsiement categoryAdvertisement = null;
 		try 
 		{
 			PreparedStatement preparedStatement = connection.prepareStatement(Query.getAdvertisementByCategoryID);
@@ -85,16 +89,18 @@ public class AdvertisementDao {
 			while(resultSet.next())
 			{
 				advertisement = new Advertisement(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("description"), resultSet.getInt("category_id"));
+				advertisementList.add(advertisement);
 			}
+			categoryAdvertisement = new CategoryAdvertsiement(categoryID,advertisementList);
 		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return advertisement;
+		return categoryAdvertisement;
 	}
 	
-	public Status updateName(int id, String name)
+	public StatusEnums updateName(int id, String name)
 	{
 		try 
 		{
@@ -103,18 +109,18 @@ public class AdvertisementDao {
 			preparedStatement.setInt(2, id);
 			if(preparedStatement.executeUpdate()>0)
 			{
-				return Status.UPDATED;
+				return StatusEnums.UPDATED;
 			}
 		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return Status.NOTUPDATED;
+		return StatusEnums.NOTUPDATED;
 	}
 
 	
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
 		AdvertisementDao advertisementDao = new AdvertisementDao();
 		try {
@@ -124,6 +130,6 @@ public class AdvertisementDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 }

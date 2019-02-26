@@ -3,7 +3,9 @@ package com.metacube.restful.dao;
 public class Query {
 	
 	
-	public final static String insertAdvertisement = "INSERT INTO advertisement"+" VALUES(?,?,?,?);";
+	public final static String insertAdvertisement = "INSERT INTO advertisement VALUES(?,?,?,?);";
+	
+	public final static String insertCategory = "INSERT INTO category VALUES(?,?);";
 	
 	public final static String getAllCategory = "SELECT * FROM category;";
 	

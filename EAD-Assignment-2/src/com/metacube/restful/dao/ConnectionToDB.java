@@ -11,7 +11,7 @@ public class ConnectionToDB {
 		Connection connection = null;
 		try 
 		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName(UtilityDB.dbDriver);
 			connection = DriverManager.getConnection(UtilityDB.dbURL+UtilityDB.dbName, UtilityDB.dbUser, UtilityDB.dbPassword);
 		} 
 		catch (ClassNotFoundException e) 
@@ -24,4 +24,5 @@ public class ConnectionToDB {
 		}
 		return connection;
 	}
+	
 }

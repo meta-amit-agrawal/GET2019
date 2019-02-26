@@ -1,7 +1,7 @@
 package com.metacube.restful.model;
 
 public class Advertisement {
-	
+
 	int id;
 	String name;
 	String description;
@@ -13,10 +13,6 @@ public class Advertisement {
 		this.name = name;
 		this.description = description;
 		this.category_id = category_id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public void setName(String name) {

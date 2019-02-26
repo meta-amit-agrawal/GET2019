@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.metacube.restful.enums.Status;
+import com.metacube.restful.enums.StatusEnums;
 import com.metacube.restful.model.Category;
 
 public class CategoryDao {
@@ -15,7 +15,29 @@ public class CategoryDao {
 	private Connection connection = ConnectionToDB.getConnection();
 	
 	
-	public Status updateName(int id, String name)
+	public StatusEnums insertCategory(Category category)
+	{
+		PreparedStatement preparedStatement;
+		try 
+		{
+			preparedStatement = connection.prepareStatement(Query.insertCategory);
+			preparedStatement.setInt(1, category.getId());
+			preparedStatement.setString(2, category.getName());
+			if(preparedStatement.executeUpdate()>0)
+			{
+				System.out.println("Inserted");
+				return StatusEnums.INSERTED;
+			}
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return StatusEnums.NOTINSERTED;
+	}
+	
+	
+	public StatusEnums updateName(int id, String name)
 	{
 		try 
 		{
@@ -24,14 +46,14 @@ public class CategoryDao {
 			preparedStatement.setInt(2, id);
 			if(preparedStatement.executeUpdate()>0)
 			{
-				return Status.UPDATED;
+				return StatusEnums.UPDATED;
 			}
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return Status.NOTUPDATED;
+		return StatusEnums.NOTUPDATED;
 	}
 	
 	public List<Category> getAllCategory()
@@ -51,7 +73,8 @@ public class CategoryDao {
 		{
 			e.printStackTrace();
 		}
+		System.out.println("category list returned "+categoryList.size());
 		return categoryList;
 	}
-
+	
 }
