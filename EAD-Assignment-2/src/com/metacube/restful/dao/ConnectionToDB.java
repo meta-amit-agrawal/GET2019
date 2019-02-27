@@ -5,7 +5,10 @@ import com.metacube.restful.dao.UtilityDB;
 
 public class ConnectionToDB {
 	
-	
+	/**
+	 * getConnection method return make the connection with the database
+	 * @return the connection with the database
+	 */
 	public static Connection getConnection()
 	{	
 		Connection connection = null;

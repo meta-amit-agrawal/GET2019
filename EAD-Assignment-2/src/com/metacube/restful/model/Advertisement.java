@@ -1,5 +1,10 @@
 package com.metacube.restful.model;
 
+/**
+ * Advertisement class used as a model class with defined properties
+ * @author admin
+ *
+ */
 public class Advertisement {
 
 	int id;
@@ -7,6 +12,7 @@ public class Advertisement {
 	String description;
 	int category_id;
 	
+	//parameterized constructor to initialize the  properties
 	public Advertisement(int id, String name, String description, int category_id) {
 		super();
 		this.id = id;
@@ -15,30 +21,22 @@ public class Advertisement {
 		this.category_id = category_id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
-	}
-
+	//returns the id of the advertisement
 	public int getId() {
 		return id;
 	}
 
+	//returns the name of the advertisement
 	public String getName() {
 		return name;
 	}
 
+	//returns the description of the advertisement 
 	public String getDescription() {
 		return description;
 	}
 
+	//returns the category id of the advertisement
 	public int getCategory_id() {
 		return category_id;
 	}

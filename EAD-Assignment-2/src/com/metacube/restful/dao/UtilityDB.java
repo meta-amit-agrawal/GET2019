@@ -2,6 +2,8 @@ package com.metacube.restful.dao;
 
 public class UtilityDB {
 	
+	//utilities required to make the connection with the database
+	
 	public static final String dbDriver = "com.mysql.cj.jdbc.Driver";
 
 	public static final String dbUser = "root";

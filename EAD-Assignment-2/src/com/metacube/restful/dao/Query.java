@@ -3,6 +3,8 @@ package com.metacube.restful.dao;
 public class Query {
 	
 	
+	//contains all the queries to perform the operations
+	
 	public final static String insertAdvertisement = "INSERT INTO advertisement VALUES(?,?,?,?);";
 	
 	public final static String insertCategory = "INSERT INTO category VALUES(?,?);";
