@@ -16,12 +16,14 @@ public interface UserService {
 	
 	public User getUserByID(int id);
 	
-	public User getUserByFirstName(String first_name);
+	/*public List<User> getUserByFirstName(String first_name);
 	
-	public User getUserByLastName(String last_name);
+	public List<User> getUserByLastName(String last_name);
 	
-	public User getUserByEmail(String email);
+	public List<User> getUserByEmail(String email);
 	
-	public User getUserbyContact(String Contact);
+	public List<User> getUserbyContact(String Contact);*/
+	
+	public List<User> serach(String type, String value);
 
 }

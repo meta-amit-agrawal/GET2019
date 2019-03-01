@@ -1,9 +1,12 @@
 package com.metacube.userdatabasemanagement.dao.implementation;
 
 import java.util.List;
+
 import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.metacube.userdatabasemanagement.dao.Query;
 import com.metacube.userdatabasemanagement.dao.UserDao;
 import com.metacube.userdatabasemanagement.mapper.UserMapper;
@@ -34,7 +37,7 @@ public class UserDaoImplementation implements UserDao
 
 	public boolean updateUser(User user) 
 	{
-		return jdbcTemplate.update(Query.updateUser, user.getFirst_name(), user.getLast_name(), user.getContact_number(), user.getEmail()) > 0;
+		return jdbcTemplate.update(Query.updateUser, user.getFirst_name(), user.getLast_name(), user.getContact_number(), user.getEmail() , user.getId()) > 0;
 	}
 
 	public List<User> getAllUser()
@@ -43,7 +46,7 @@ public class UserDaoImplementation implements UserDao
 	}
 	
 	
-	public User getUserByID(int id)
+	/*public User getUserByID(int id)
 	{
 		List<User> userList = getAllUser();
 		for(User u : userList)
@@ -54,6 +57,11 @@ public class UserDaoImplementation implements UserDao
 			}
 		}
 		return null;
+	}*/
+
+	public List<User> search(String type, String value) {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query(Query.search+type+" = '"+value+"'", new UserMapper());
 	}
 
 }

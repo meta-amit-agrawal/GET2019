@@ -14,5 +14,7 @@ public interface UserDao {
 	
 	public List<User> getAllUser();
 	
+	public List<User> search(String type , String value);
+	
 
 }

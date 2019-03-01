@@ -50,56 +50,67 @@ public class UserServiceImplementation implements UserService
 		return null;
 	}
 
-	public User getUserByFirstName(String first_name)
+	public List<User> serach(String type, String value) 
+	{
+		return userDao.search(type, value);
+	}
+
+	/*public List<User> getUserByFirstName(String first_name)
 	{
 		List<User> userList = getAll();
+		List<User> result = new ArrayList<User>();
 		for(User u : userList)
 		{
 			if(u.getFirst_name().equalsIgnoreCase(first_name))
 			{
-				return u;
+				result.add(u);
 			}
 		}
-		return null;
+		return result;
 	}
 
-	public User getUserByLastName(String last_name)
+	public List<User> getUserByLastName(String last_name)
 	{
 		List<User> userList = getAll();
+		List<User> result = new ArrayList<User>();
 		for(User u : userList)
 		{
 			if(u.getLast_name().equalsIgnoreCase(last_name))
 			{
-				return u;
+				result.add(u);
 			}
 		}
-		return null;
+		return result;
 	}
 
-	public User getUserByEmail(String email)
+	public List<User> getUserByEmail(String email)
 	{
 		List<User> userList = getAll();
+		List<User> result = new ArrayList<User>();
 		for(User u : userList)
 		{
 			if(u.getEmail().equalsIgnoreCase(email))
 			{
-				return u;
+				result.add(u);
 			}
 		}
-		return null;
+		return result;
 	}
 
-	public User getUserbyContact(String Contact)
+	public List<User> getUserbyContact(String Contact)
 	{
 		List<User> userList = getAll();
+		List<User> result = new ArrayList<User>();
 		for(User u : userList)
 		{
 			if(u.getContact_number().equalsIgnoreCase(Contact))
 			{
-				return u;
+				result.add(u);
 			}
 		}
-		return null;
-	}
+		return result;
+	}*/
+	
+	
 
 }

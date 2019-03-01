@@ -19,7 +19,7 @@
    <td>${user.last_name}</td>  
    <td>${user.contact_number}</td>
    <td>${user.email}</td>  
-   <td><a href="updateUser/${user.id}">Edit</a></td>  
+   <td><a href="edit/${user.id}">Edit</a></td>  
    <td><a href="delete/${user.id}">Delete</a></td>  
    </tr>  
    </c:forEach>  

@@ -7,11 +7,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.metacube.userdatabasemanagement.model.User;
 import com.metacube.userdatabasemanagement.service.UserService;
 
+
+/**
+ * UserController class controls the request to perform the operation
+ * @author admin
+ *
+ */
 
 @Controller
 @RequestMapping("/user")
@@ -20,13 +27,21 @@ public class UserController
 	@Autowired
 	private UserService userService;
 	
-	
+	/**
+	 * Maps the request with addUser.jsp page
+	 * @return
+	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public String add() 
 	{
 		return "user/addUser";
 	}
 	
+	/**
+	 * Maps the request from addUser.jsp page and add the user in database
+	 * @param user
+	 * @redirects the page to allUsre.jsp
+	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public String add(User user)
 	{
@@ -34,6 +49,11 @@ public class UserController
 		return "redirect:/user/allUser";
 	}
 	
+	/**
+	 * Maps the request from allUser to edit the user
+	 * @param id
+	 * @redirects the page to updateUser.jsp
+	 */
 	@RequestMapping(value = "/edit/{id}" ,  method = RequestMethod.GET)
 	public ModelAndView get(@PathVariable("id") int id)
 	{
@@ -41,6 +61,11 @@ public class UserController
 		return new ModelAndView("user/updateUser" , "user" , user);
 	}
 	
+	/**
+	 * Maps the request from updateUser.jsp to update  which updates the data to database
+	 * @param user
+	 * @redirects to allUser.jsp
+	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(User user)
 	{
@@ -48,6 +73,10 @@ public class UserController
 		return "redirect:/user/allUser";
 	}
 	
+	/**
+	 * Maps the request to displays list of all user
+	 * @redirects to page allUser.jsp which shows the list of Users
+	 */
 	@RequestMapping(value = "/allUser" , method = RequestMethod.GET)
 	public ModelAndView getAll()
 	{
@@ -55,9 +84,21 @@ public class UserController
 		return new ModelAndView("user/allUser", "users", userList);
 	}
 	
+	/**
+	 * Maps the request to delete the user from the database
+	 * @param id
+	 * @redirects to page allUser.jsp which shows the list of users
+	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String delete(@PathVariable("Id") int id) {
+	public String delete(@PathVariable("id") int id) {
 		userService.delete(id);
 		return "redirect:/user/allUser";
+	}
+	
+	@RequestMapping(value = "/search" , method = RequestMethod.GET)
+	public ModelAndView search(@RequestParam("type") String type, @RequestParam("value") String value)
+	{
+		List<User> userList = userService.serach(type, value);
+		return new ModelAndView("user/allUser", "users", userList);
 	}
 }

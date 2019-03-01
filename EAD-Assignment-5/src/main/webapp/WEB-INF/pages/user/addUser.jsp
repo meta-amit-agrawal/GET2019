@@ -3,17 +3,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <title>Add User</title>
 </head>
 <body>
 <%@include file="../partials/header.html" %>
-	<form action="add" method="post">
-		<span>First Name</span><input type="text" name="first_name" maxlength="10" required /><br>
-		<span>Last Name</span><input type="text" name="last_name" maxlength="10" required /><br>
-		<span>Contact Number</span><input type="number" pattern="[0-9] {10}" name="contact_number" required /><br>
-	    <span>Email Id</span><input type="email" name="email" required /><br> 
-	    <input type="submit" value="submit">
+<div class="container">
+	<form action="addUser" method="post">
+	 <label>First Name</label>
+	 <input type="text" class="form-control" name="first_name" maxlength="20" required>
+	 <label>Last Name</label>
+	 <input type="text" class="form-control" id="lName" name="last_name" maxlength="20" required>
+	 <label>Contact Number</label>
+	 <input type="number" class="form-control" pattern="[0-9] {10}" name="contact_number" required />
+	 <label >Email</label>
+	 <input type="email" class="form-control" name="email" maxlength="50" required />
+	  <input type="submit" class="btn btn-primary" value="submit">
 	</form>
+</div>
 </body>
 </html>
