@@ -7,6 +7,11 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.metacube.userdatabasemanagement.model.User;
 
+/**
+ * Maps the data extracted from database to user object
+ * @author admin
+ *
+ */
 public class UserMapper implements RowMapper<User> {
 
 	public User mapRow(ResultSet rs, int i) throws SQLException {

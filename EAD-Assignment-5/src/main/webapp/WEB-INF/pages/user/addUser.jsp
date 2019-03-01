@@ -19,7 +19,7 @@
 	 <label>Last Name</label>
 	 <input type="text" class="form-control" id="lName" name="last_name" maxlength="20" required>
 	 <label>Contact Number</label>
-	 <input type="number" class="form-control" pattern="[0-9] {10}" name="contact_number" required />
+	 <input type="text" class="form-control" pattern="[0-9]{10}" name="contact_number"  required />
 	 <label >Email</label>
 	 <input type="email" class="form-control" name="email" maxlength="50" required />
 	  <input type="submit" class="btn btn-primary" value="submit">

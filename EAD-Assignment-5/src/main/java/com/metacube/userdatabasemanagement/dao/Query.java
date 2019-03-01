@@ -2,14 +2,6 @@ package com.metacube.userdatabasemanagement.dao;
 
 public class Query {
 	
-	/*public static final String getUserByFirstName = "select * from user where first_name = ?;";
-	
-	public static final String getUserByLastName = "select * from user where last_name = ?;";
-	
-	public static final String getUserByEmail = "select * from user where email = ?;";
-	
-	public static final String getUserByContact = "select * from user where contact_number = ?;";*/
-	
 	public static final String search = "select * from user where ";
 	
 	public static final String getAllUser = "select * from user;";

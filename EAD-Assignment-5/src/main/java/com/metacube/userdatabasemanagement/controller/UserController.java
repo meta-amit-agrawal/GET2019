@@ -95,10 +95,16 @@ public class UserController
 		return "redirect:/user/allUser";
 	}
 	
+	/**
+	 * To search the list of user from the database
+	 * @param type which can be first_name , last_name , etc.
+	 * @param value which is to be searched for from the database
+	 * @redirects to page which shows the list of searched user
+	 */
 	@RequestMapping(value = "/search" , method = RequestMethod.GET)
 	public ModelAndView search(@RequestParam("type") String type, @RequestParam("value") String value)
 	{
-		List<User> userList = userService.serach(type, value);
+		List<User> userList = userService.search(type, value);
 		return new ModelAndView("user/allUser", "users", userList);
 	}
 }
