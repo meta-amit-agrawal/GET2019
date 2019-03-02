@@ -13,5 +13,8 @@ public class Query
 	
 	public static final String insertUser = "insert into user (first_name, last_name, contact_number, email) values(?,?,?,?);";
 	
+	public static final String updateAdmin = "update admin set password = ? where username = ?; ";
+	
+	public static final String getAdmin = "select * from admin where username = ";
 	
 }
