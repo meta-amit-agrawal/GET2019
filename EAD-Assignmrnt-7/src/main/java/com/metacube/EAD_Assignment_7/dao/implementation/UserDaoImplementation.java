@@ -13,8 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.metacube.EAD_Assignment_7.dao.UserDao;
-import com.metacube.EAD_Assignment_7.model.Login;
 import com.metacube.EAD_Assignment_7.model.User;
+
+
+/**
+ * UserDaoImplementation class implements the interface Userdao which contains some common method to perform some operations
+ * @author admin
+ *
+ */
 
 @Repository
 @Transactional
@@ -23,27 +29,24 @@ public class UserDaoImplementation implements UserDao {
 	@Autowired
 	SessionFactory sessionFactory;
 	
+	//add user to database
 	@Override
 	public boolean addUser(User user) {
 		// TODO Auto-generated method stub
 		Session current = sessionFactory.getCurrentSession();
-		try{
-			current.save(user);
-			return true;
-		}
-		catch(Exception e)
-		{
-			System.out.println(e.getMessage());
-		}
-		return false;
+		current.save(user);
+		return true;
 	}
 
+	//delete user from database
 	@Override
-	public boolean deleteUser(int id) {
+	public boolean deleteUser(User user) {
 		// TODO Auto-generated method stub
-		return false;
+		sessionFactory.getCurrentSession().delete(user);
+		return true;
 	}
 
+	//update user in database
 	@Override
 	public boolean updateUser(User user) {
 		// TODO Auto-generated method stub
@@ -51,17 +54,18 @@ public class UserDaoImplementation implements UserDao {
 		return false;
 	}
 
+	//returns the list of users available in database
 	@Override
 	public List<User> getAllUser() {
-		// TODO Auto-generated method stub
 		Session current = sessionFactory.getCurrentSession();	
 		CriteriaBuilder builder = current.getCriteriaBuilder();
-		CriteriaQuery<User> criteriaQuery =builder.createQuery(User.class);
-		Root<User> userRoot = criteriaQuery.from(User.class);
-		criteriaQuery.select(userRoot);
-		return current.createQuery(criteriaQuery).getResultList();
+		CriteriaQuery<User> cQuery =builder.createQuery(User.class);
+		Root<User> fromUser = cQuery.from(User.class);
+		cQuery.select(fromUser);
+		return current.createQuery(cQuery).getResultList();
 	}
 
+	//searches the data from user with respect to given type
 	@Override
 	public List<User> search(String type, String value) {
 		// TODO Auto-generated method stub
@@ -72,5 +76,7 @@ public class UserDaoImplementation implements UserDao {
     	cQuery.select(fromUser).where(builder.equal(fromUser.get(type), value));
     	return currentSession.createQuery(cQuery).getResultList(); 
 	}
-
+	
+	
+	
 }

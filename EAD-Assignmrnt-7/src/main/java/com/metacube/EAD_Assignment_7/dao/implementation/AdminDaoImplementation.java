@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.metacube.EAD_Assignment_7.dao.Admindao;
 import com.metacube.EAD_Assignment_7.model.Login;
 
+/**
+ * AdminDaoImplementation class implements the interface Admindao which contains some common method to perform some operations
+ * @author admin
+ *
+ */
 
 @Repository
 @Transactional
@@ -17,6 +22,7 @@ public class AdminDaoImplementation implements Admindao
 	@Autowired
 	SessionFactory sessionFactory;
 
+	//updates the password into the database
 	@Override
 	public boolean updatePassword(Login login) {
 		// TODO Auto-generated method stub
@@ -25,6 +31,7 @@ public class AdminDaoImplementation implements Admindao
 		
 	}
 
+	//gets the login details from the database
 	@Override
 	public Login getLoginbyUserName(String username) {
 		// TODO Auto-generated method stub
@@ -33,15 +40,3 @@ public class AdminDaoImplementation implements Admindao
 	}
 	
 }
-/*Session current = sessionFactory.getCurrentSession();	
-CriteriaBuilder builder = current.getCriteriaBuilder();
-CriteriaQuery<DBUser> criteriaQuery =builder.createQuery(DBUser.class);
-Root<DBUser> userRoot = criteriaQuery.from(DBUser.class);
-criteriaQuery.select(userRoot).where(builder.equal(userRoot.get("username"),u.getUsername()));
-try{
-	return current.createQuery(criteriaQuery).getSingleResult();
-}catch(Exception e){
- System.out.println(e.getMessage());
-}
-return user;
-}*/

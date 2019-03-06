@@ -13,6 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.metacube.EAD_Assignment_7.model.User;
 import com.metacube.EAD_Assignment_7.service.UserService;
 
+/**
+ * UserController class controls the request to perform the operation
+ * @author admin
+ *
+ */
 
 
 @Controller

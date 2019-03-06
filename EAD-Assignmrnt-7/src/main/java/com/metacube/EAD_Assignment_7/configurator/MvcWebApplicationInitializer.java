@@ -2,6 +2,7 @@ package com.metacube.EAD_Assignment_7.configurator;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+//all the request are mapped to the Dispatcher Servlet with the help of this class
 public class MvcWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
 {
 

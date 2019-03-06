@@ -11,7 +11,7 @@ public interface UserDao
 			public boolean addUser(User user);
 			
 			//to delete user from database
-			public boolean deleteUser(int id);
+			public boolean deleteUser(User user);
 			
 			//to update user in database
 			public boolean updateUser(User user);

@@ -36,13 +36,14 @@ public class MvcWebConfig implements WebMvcConfigurer
 	@Autowired
 	private ApplicationContext applicationContext;
 
+	//getting the properties from database.properties file in resource folder
 	private final String URL = "url";
 	private final String USER = "user";
 	private final String DRIVER = "driver";
 	private final String PASSWORD = "password";
 	
 
-	
+	//resolves the template with the following prefix and suffix to the jsp page returned from the controller
 	@Bean
 	public InternalResourceViewResolver jspViewResolver() {
 	    InternalResourceViewResolver resolver= new InternalResourceViewResolver();
@@ -51,6 +52,7 @@ public class MvcWebConfig implements WebMvcConfigurer
 	    return resolver;
 	}  
 	
+	//returns the factory bean from the session factory of the hibernate
 	@Bean
 	public LocalSessionFactoryBean getSessionFactory() 
 	{
@@ -69,6 +71,8 @@ public class MvcWebConfig implements WebMvcConfigurer
 	    return factoryBean;
 	  }
 	
+	
+	//it returns the transaction manageer which handles the session of the hibernate
 	@Bean
 	public HibernateTransactionManager getTransactionManager() 
 	{
@@ -77,19 +81,15 @@ public class MvcWebConfig implements WebMvcConfigurer
 	    return transactionManager;
 	}
 	
+	
+	//it sets the database properties into the data source
 	@Bean
 	public DataSource dataSource() {
-		System.out.println("start");
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		System.out.println("url");
 		driverManagerDataSource.setUrl(env.getProperty(URL));
-		System.out.println("user");
 		driverManagerDataSource.setUsername(env.getProperty(USER));
-		System.out.println("pswd");
 		driverManagerDataSource.setPassword(env.getProperty(PASSWORD));
-		System.out.println("driver");
 		driverManagerDataSource.setDriverClassName(env.getProperty(DRIVER));
-		System.out.println("end");
 		return driverManagerDataSource;
 	}
 	

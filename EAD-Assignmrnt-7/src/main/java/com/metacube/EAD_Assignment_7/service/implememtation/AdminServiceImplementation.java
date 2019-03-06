@@ -13,12 +13,14 @@ public class AdminServiceImplementation implements AdminService
 	@Autowired
 	private Admindao adminDao;
 
+	//updates the password into database by calling admin dao class
 	@Override
 	public boolean updatePassword(Login login) {
 		// TODO Auto-generated method stub
 		return adminDao.updatePassword(login);
 	}
 
+	//gets the login details verified from database
 	@Override
 	public boolean getAdmin(Login login) {
 		// TODO Auto-generated method stub
