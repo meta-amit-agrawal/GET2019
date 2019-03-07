@@ -2,8 +2,8 @@
 public class Node 
 {
 	
-	private int data;
-	private Node next;
+	int data;
+	Node next;
 	
 	
 	public Node(int data)
@@ -25,11 +25,4 @@ public class Node
 	{
 		return next;
 	}
-	public boolean hasNext()
-	{
-		if(next==null)
-			return false;
-		return true;
-	}
-	
 }

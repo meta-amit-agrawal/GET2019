@@ -2,7 +2,7 @@
 public class LinkedList 
 {
 	
-	Node head;
+	Node head,current;
 	int size;
 	
 	public LinkedList()
@@ -17,110 +17,99 @@ public class LinkedList
 		return false;
 	}
 	
-	public void addNode(Node node)
+	public void addData(int data)
 	{
+		Node node = new Node(data);
+		node.setNext(null);
 		if(head == null)
 		{
 			head = node;
-			node.setNext(null);
+			current = node;
 			size+=1;
 		}
-		else
-		{
-			Node current = head;	
-			while(current.getNext()!=null)
-			{
-				current = current.getNext();
-			}
-			current.setNext(node);
-			node.setNext(null);
-			size+=1;
-		}
+		current.setNext(node);;
+		current=node;
 	}
 	
-	public void rotate(int left, int right, int rotateTimes) throws Exception
+	 public void rotate(int left,int right,int noOfTimes) throws Exception
+	 {
+	        
+		 int subListSize = right - left + 1;
+		 
+		 if(left < 0 || right >size || left > right)
+	     {
+			 throw new Exception("Provide Valid Left and Right Coordinates");
+	     }
+		 
+		 if (noOfTimes > subListSize) 
+		 { 
+			 noOfTimes = noOfTimes % subListSize; 
+		 }
+	     
+		 Node node=head;
+	     Node end;
+	     Node joint_start=node;
+	     Node joint_end;
+	     int start_position=1;
+	     int end_position;
+	     
+	     while(start_position<left-1) 
+	     {
+	    	 joint_start=joint_start.getNext();
+	    	 start_position++;
+	     }
+	     end_position=left;
+	     joint_end=joint_start.getNext();
+	     
+	     while(end_position<right) 
+	     {
+	    	 joint_end=joint_end.getNext();
+	    	 end_position++;
+	     }
+	     
+	     Node start=joint_start.getNext();
+	     
+	     if(joint_end==null) 
+	     {
+	    	 end=joint_end;
+	     }
+	     else 
+	     {
+	    	 end=joint_end.getNext();
+	     }
+	     
+	     while(noOfTimes>0) 
+	     {
+	    	 Node temp=start;
+	    	 start=start.getNext();
+	    	 joint_end.setNext(temp);
+	    	 joint_end=temp;
+	    	 noOfTimes--;
+	     }
+	     joint_start.setNext(start);
+	     joint_end.setNext(end);
+	 }
+	
+	public Node getHead()
 	{
-		int sublistSize = right-left+1;
-		if(rotateTimes > sublistSize)
-		{
-			rotateTimes = rotateTimes % sublistSize;
-			System.out.println(rotateTimes);
-		}
-		
-		if(left<0 || right>size || left>size || right<0)
-		{
-			throw new Exception("Not a correct positions");
-		}
-		
-		Node startNode,endNode,pre,end;
-		startNode=endNode=pre=end=null;
-		Node current = head;
-		
-		int count=0;
-		
-		
-		while(current.getNext()!=null)
-		{
-			count++;
-			System.out.println("Hello");
-			if(count==left-1)
-			{
-				pre = current;
-				startNode = current.getNext();
-			}
-			if(count==right-1)
-			{
-				end = current; 
-				endNode = current.getNext();
-			}
-			current = current.getNext();
-		}
-		
-		
-		System.out.println(startNode.getData());
-		System.out.println(endNode.getData());
-		System.out.println(rotateTimes);
-		
-		while(rotateTimes > 0)
-		{
-			
-		}
-		
+		return head;
 	}
 	
-	public void printList()
+	public boolean detectLoop()
 	{
-		Node current = head;
-		System.out.println("Currently the list is....");
-		while(current!=null)
-		{
-			System.out.println(current.getData());
-			current = current.getNext();
+		Node start, end;
+		start  = head;
+		end =head.getNext();
+		while(end!=null)
+		{			
+			if(end.getNext()!=null)
+			{
+				end = end.getNext().getNext();
+				start = start.getNext();
+				if(start == end)
+					return true;
+			}
 		}
+		return false;
 	}
-	
-	public static void main(String args[])
-	{
-		LinkedList linkedList = new LinkedList();
-		Node node1 = new Node(1);
-		Node node2 = new Node(2);
-		Node node3 = new Node(3);
-		Node node4 = new Node(4);
-		Node node5 = new Node(5);
-		
-		linkedList.addNode(node1);
-		linkedList.addNode(node2);
-		linkedList.addNode(node3);
-		linkedList.addNode(node4);
-		linkedList.addNode(node5);
-		linkedList.printList();
-		
-		try {
-			linkedList.rotate(2, 4, 5);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
-	}
-	
 }
