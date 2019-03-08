@@ -1,0 +1,17 @@
+Follow the steps to use the User Managament System
+
+Step 1:
+Install the JDK version 8 and set the environment variables.
+
+Step 2:
+Install the tomcat server and mysql server.
+
+Step 3:
+Now create the database and update the database name in place of 'user' in url of database 
+at end in database.properties file available in src/main/resources folder.
+
+Step 4:
+Now run the query available in database.sql file in the mysql server to create the table in the database.
+
+Step 5:
+Now you can use the User Management System Application
