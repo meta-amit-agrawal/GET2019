@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.soap.metacube.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.soap.metacube.com" xmlns:intf="http://service.soap.metacube.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.soap.metacube.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="areaOfTriagle">
+    <complexType>
+     <sequence>
+      <element name="sideA" type="xsd:double"/>
+      <element name="sideB" type="xsd:double"/>
+      <element name="sideC" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="areaOfTriagleResponse">
+    <complexType>
+     <sequence>
+      <element name="areaOfTriagleReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="perimeterOfTriangle">
+    <complexType>
+     <sequence>
+      <element name="sideA" type="xsd:double"/>
+      <element name="sideB" type="xsd:double"/>
+      <element name="sideC" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="perimeterOfTriangleResponse">
+    <complexType>
+     <sequence>
+      <element name="perimeterOfTriangleReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="perimeterOfTriangleRequest">
+
+      <wsdl:part element="impl:perimeterOfTriangle" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="perimeterOfTriangleResponse">
+
+      <wsdl:part element="impl:perimeterOfTriangleResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="areaOfTriagleRequest">
+
+      <wsdl:part element="impl:areaOfTriagle" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="areaOfTriagleResponse">
+
+      <wsdl:part element="impl:areaOfTriagleResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CalculateTriangle">
+
+      <wsdl:operation name="areaOfTriagle">
+
+         <wsdl:input message="impl:areaOfTriagleRequest" name="areaOfTriagleRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:areaOfTriagleResponse" name="areaOfTriagleResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="perimeterOfTriangle">
+
+         <wsdl:input message="impl:perimeterOfTriangleRequest" name="perimeterOfTriangleRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:perimeterOfTriangleResponse" name="perimeterOfTriangleResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CalculateTriangleSoapBinding" type="impl:CalculateTriangle">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="areaOfTriagle">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="areaOfTriagleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="areaOfTriagleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="perimeterOfTriangle">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="perimeterOfTriangleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="perimeterOfTriangleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CalculateTriangleService">
+
+      <wsdl:port binding="impl:CalculateTriangleSoapBinding" name="CalculateTriangle">
+
+         <wsdlsoap:address location="http://localhost:8080/EAD-Assignment-3/services/CalculateTriangle"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
