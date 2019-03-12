@@ -5,8 +5,15 @@ public class EvaluateExpression
 	
 	Stack stack = new StackImplementation();
 	
+	/**
+	 * This method evaluates the postfix expression
+	 * @param exp
+	 * @return the final result of the postfix expression
+	 * @throws Exception if expression is not valid
+	 */
     public int evaluate(String exp) throws Exception 
     {	
+    	//loop to iterate over the expression given as input
         for(int index=0;index<exp.length();index++) 
         {
             char character = exp.charAt(index);
@@ -41,6 +48,7 @@ public class EvaluateExpression
                }
             }
         }
+        //returns the top value by deleting the value(free space)
         return stack.Pop(); 
     }
 }

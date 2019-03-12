@@ -1,18 +1,21 @@
 package Question3;
 
-
+//Queue interface defined with the following operations
 public interface Queue {
 
+	//to add the data at the end of the list
 	public void Enqueue(int data);
 	
+	//to delete the data from the start of the queue
 	public int  Dequeue();
 	
+	//to check whether queue is empty or not
 	public boolean isEmpty();
 	
+	//to check whether queue is full or not
 	public boolean isFull();
 	
-	public void Traverse();
-	
+	//to make the queue circular
 	public void makeItCircular();
 	
 }

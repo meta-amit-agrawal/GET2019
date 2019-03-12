@@ -3,8 +3,12 @@ package Question1;
 public class StackImplementation implements Stack
 {
 	
-	  StackImplementation stack;
 	  Node head,top;
+	  
+	  /**
+	   * Push method will add the data at the top of the stack
+	   * @param data
+	   */
 	  @Override
 	  public void Push(int data) 
 	  {
@@ -21,6 +25,10 @@ public class StackImplementation implements Stack
 	     }
 	  }
 
+	  /**
+	   * Pop method deletes the Top node of the stack
+	   * @return the deleted data from the stack
+	   */
 	  @Override
 	  public int Pop() 
 	  {
@@ -29,6 +37,10 @@ public class StackImplementation implements Stack
 	     return data;
 	  }
 
+	  /**
+	   * This method performs the peek operation of the stack
+	   * @return the top data of the stack
+	   */
 	  @Override
 	  public int Top() 
 	  {
