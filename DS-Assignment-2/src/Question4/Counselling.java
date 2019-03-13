@@ -26,7 +26,7 @@ public class Counselling
 	 * Method to read the input file excel sheet which contains list of program with capacity
 	 * @param filePath
 	 */
-	public void readProgramCapacity(String filePath)
+	private void readProgramCapacity(String filePath)
 	{
 		File file = new File(filePath);
 		Workbook workbook;
@@ -58,7 +58,7 @@ public class Counselling
 	 * method reads the excel sheet which contains the students sorted according to rank  
 	 * @param filePath
 	 */
-	public void readStudentPrefernece(String filePath)
+	private void readStudentPrefernece(String filePath)
 	{
 		File file = new File(filePath);
 		Workbook workbook;
@@ -92,8 +92,10 @@ public class Counselling
 	 * @param path
 	 * @throws WriteException
 	 */
-	public void studentCouncil(String path) throws WriteException
+	public void studentCouncil(String path , String studentPrefernce, String programCapacity) throws WriteException
 	{
+		readProgramCapacity(programCapacity);
+		readStudentPrefernece(studentPrefernce);
 		WritableWorkbook workbook;		
 		try 
 		{
@@ -142,9 +144,5 @@ public class Counselling
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
+
 }

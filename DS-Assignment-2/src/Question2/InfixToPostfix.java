@@ -1,15 +1,11 @@
 package Question2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
-
 public class InfixToPostfix 
 {
 	
 	StackImplementation stack = new StackImplementation();
 	
+	//This method will return the precedence of the operator
 	private int prec(String operand) 
 	{ 
 		switch (operand) 
@@ -45,11 +41,16 @@ public class InfixToPostfix
 		return -1; 
 	} 
 
-	private String evaluate(String[] exp) {
+	//This method will convert the infix expression to postfix expression
+	private String evaluate(String[] exp) throws Exception {
 		String postfix="";
-		stack.Push("N");
-		for(int index=0;index<exp.length;index++) {
+//		stack.Push("N");
+		
+		for(int index=0;index<exp.length;index++) 
+		{
 			String character = exp[index];
+			
+			//checking for the character or the number
 			if(isElementNumeric(character) || isElementAlphabet(character)) {
 				postfix+=character; }
 
@@ -62,11 +63,12 @@ public class InfixToPostfix
 					postfix += stack.Pop(); 
 
 				if (!stack.isEmpty() && !(stack.Top().equals("("))) 
-					System.out.println( "Invalid Expression"); // invalid expression                 
+					throw new Exception("Invalid Exception");            
 				else
 					stack.Pop(); 
 			}
 
+			//This case will execute when the operator is encountered
 			else{ 
 
 				while (!stack.isEmpty() && prec(character) <= prec(stack.Top())) 
@@ -74,11 +76,14 @@ public class InfixToPostfix
 				stack.Push(character); 
 			} 
 		}	
+		
+		//finally merging the left operator with the postfix expression
 		while (stack.top!=stack.head) 
 			postfix += stack.Pop(); 
 		return postfix;
 	} 
 
+	//This method will check foe the given string is number or not
 	private boolean isElementNumeric(String element) {
 		boolean result=false;
 		for(int index=0;index<element.length();index++) {
@@ -90,6 +95,7 @@ public class InfixToPostfix
 		return result;
 	}
 
+	//This method will check for the string is valid alphabet or not
 	private boolean isElementAlphabet(String element) {
 		boolean result=false;
 		if(element.length()>1)
@@ -103,10 +109,10 @@ public class InfixToPostfix
 		return result;
 	}
 	
-	public String convertToPostfix(String input)
+	//This method will take the infix expression and split them in the basis of space 
+	public String convertToPostfix(String input) throws Exception
 	{
 		String result="";
-		
 		String array[] = new String[100];
 		array = input.split(" ");
 		result = evaluate(array);
@@ -120,7 +126,7 @@ public class InfixToPostfix
 	{
 		InfixToPostfix infixToPostfix = new InfixToPostfix();
 		try {
-			System.out.println(infixToPostfix.convertToPostfix("a + b * ( c + d )"));
+			System.out.println(infixToPostfix.convertToPostfix("a + b"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

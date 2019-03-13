@@ -4,10 +4,10 @@ package Question3;
 public interface Queue {
 
 	//to add the data at the end of the list
-	public void Enqueue(int data);
+	public void Enqueue(int data) throws Exception;
 	
 	//to delete the data from the start of the queue
-	public int  Dequeue();
+	public int  Dequeue() throws Exception;
 	
 	//to check whether queue is empty or not
 	public boolean isEmpty();
