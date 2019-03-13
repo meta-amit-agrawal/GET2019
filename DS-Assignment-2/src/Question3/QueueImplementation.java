@@ -2,10 +2,9 @@ package Question3;
 
 public class QueueImplementation implements Queue 
 {
-
-	private static final int SIZE = 100;
 	int front=0;
 	int rear=0;
+	int SIZE = UtilityClass.FIXED_SIZE;
 	boolean circular_flag=false;
 	int[] queue = new int[SIZE];
 	@Override

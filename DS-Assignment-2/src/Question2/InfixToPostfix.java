@@ -1,5 +1,8 @@
 package Question2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 
 public class InfixToPostfix 
@@ -7,7 +10,7 @@ public class InfixToPostfix
 	
 	StackImplementation stack = new StackImplementation();
 	
-	public int prec(String operand) 
+	private int prec(String operand) 
 	{ 
 		switch (operand) 
 		{
@@ -18,7 +21,7 @@ public class InfixToPostfix
 			return 2;
 		case "&&":
 			return 3;
-		case "|":
+		case "!":
 			return 4;
 		case "&":
 			return 5;
@@ -42,7 +45,7 @@ public class InfixToPostfix
 		return -1; 
 	} 
 
-	public void evaluate(String[] exp) {
+	private String evaluate(String[] exp) {
 		String postfix="";
 		stack.Push("N");
 		for(int index=0;index<exp.length;index++) {
@@ -73,10 +76,10 @@ public class InfixToPostfix
 		}	
 		while (stack.top!=stack.head) 
 			postfix += stack.Pop(); 
-		System.out.println(postfix);
+		return postfix;
 	} 
 
-	public boolean isElementNumeric(String element) {
+	private boolean isElementNumeric(String element) {
 		boolean result=false;
 		for(int index=0;index<element.length();index++) {
 			if(Character.isDigit(element.charAt(index)))
@@ -87,7 +90,7 @@ public class InfixToPostfix
 		return result;
 	}
 
-	public boolean isElementAlphabet(String element) {
+	private boolean isElementAlphabet(String element) {
 		boolean result=false;
 		if(element.length()>1)
 			return result;
@@ -98,6 +101,30 @@ public class InfixToPostfix
 				return result;
 		}
 		return result;
+	}
+	
+	public String convertToPostfix(String input)
+	{
+		String result="";
+		
+		String array[] = new String[100];
+		array = input.split(" ");
+		result = evaluate(array);
+		return result;
+		
+	}
+	
+	
+	
+	public static void main(String args[])
+	{
+		InfixToPostfix infixToPostfix = new InfixToPostfix();
+		try {
+			System.out.println(infixToPostfix.convertToPostfix("a + b * ( c + d )"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	

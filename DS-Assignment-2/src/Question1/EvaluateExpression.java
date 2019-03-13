@@ -17,8 +17,23 @@ public class EvaluateExpression
         for(int index=0;index<exp.length();index++) 
         {
             char character = exp.charAt(index);
-            if(Character.isDigit(character))
-            	stack.Push(Character.getNumericValue(character));
+            if(character == ' ')
+            {
+            	continue;
+            }
+            else if(Character.isDigit(character))
+            {
+            	int tempNum=0;
+            	while(Character.isDigit(character))
+            	{
+            		tempNum =tempNum*10+(Character.getNumericValue(character));
+            		index+=1;
+            		character = exp.charAt(index);
+            	}
+            	index-=1;
+            	stack.Push(tempNum);
+            	
+            }
             else 
             {
                 int value1 = stack.Pop();
@@ -51,4 +66,5 @@ public class EvaluateExpression
         //returns the top value by deleting the value(free space)
         return stack.Pop(); 
     }
+    
 }
