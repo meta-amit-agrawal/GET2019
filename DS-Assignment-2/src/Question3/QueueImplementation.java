@@ -21,7 +21,8 @@ public class QueueImplementation implements Queue
 			queue[rear]=data;
 			rear+=1;
 		}
-		throw new Exception("Queue is Full");
+		else
+			throw new Exception("Queue is Full");
 	}
 
 	//This method will delete the data from the queue and returns the deleted value
@@ -36,7 +37,8 @@ public class QueueImplementation implements Queue
 		{
 			return queue[front++];
 		}
-		throw new Exception("Queue is Empty");
+		else
+			throw new Exception("Queue is Empty");
 		
 	}
 
