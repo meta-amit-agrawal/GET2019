@@ -1,20 +1,29 @@
 
+//POJO of node
 public class Node 
 {
-	
 	Data data;
 	Node leftChild;
 	Node rightChild;
-	Node parent;
-	
+	//constructor to initialize the properties of node 
 	public Node(String key, String value)
 	{
 		this.data = new Data(key, value);
 		this.leftChild = null;
 		this.rightChild = null;
-		this.parent = null;
 	}
 
+	//getter and setter of node properties
+	public void setKey(String key)
+	{
+		this.data.setKey(key);
+	}
+	
+	public void setValue(String value)
+	{
+		this.data.setValue(value);
+	}
+	
 	public Node getLeftChild() {
 		return leftChild;
 	}
@@ -39,16 +48,4 @@ public class Node
 		return data.getValue();
 	}
 
-	public Node getParent() {
-		return parent;
-	}
-
-	public void setParent(Node parent) {
-		this.parent = parent;
-	}
-	
-	
-	
-	
-	
 }
