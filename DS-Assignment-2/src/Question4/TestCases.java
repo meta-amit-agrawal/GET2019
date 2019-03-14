@@ -14,7 +14,7 @@ public class TestCases
 		Counselling counselling = new Counselling();
 		String path = "C:/Users/AMIT-PC/Desktop/";
 		String studentPrefernce = "C:/Users/AMIT-PC/Desktop/student.xls";
-		String programCapacity = "C:/Users/AMIT-PC/Desktop/proggram.xls";
+		String programCapacity = "C:/Users/AMIT-PC/Desktop/program.xls";
 		counselling.studentCouncil(path, studentPrefernce, programCapacity);
 		
 	}
