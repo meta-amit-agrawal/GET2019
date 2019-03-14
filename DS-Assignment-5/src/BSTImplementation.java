@@ -65,9 +65,57 @@ public class BSTImplementation implements BST
 	}
 
 	@Override
-	public boolean delete(String key) {
-		
+	public boolean delete(String key) throws Exception 
+	{
+		deleteNode(root, key);
 		return false;
+	}
+
+	private void deleteNode(Node node, String key) throws Exception 
+	{
+		Node parent=null;
+		while(node!=null && !node.getKey().equals(key))
+		{
+			parent = node;
+			if(key.compareTo(node.getKey())<=-1)
+			{
+				node = node.getLeftChild();
+			}
+			else
+			{
+				node = node.getRightChild();
+			}
+		}
+		if(node == null)
+		{
+			throw new Exception("Node not available in tree");
+		}
+		
+		if(node.getLeftChild()==null && node.getRightChild()==null)
+		{
+			if(node != root)
+			{
+				if(parent.getLeftChild() == node)
+				{
+					parent.setLeftChild(null);
+				}
+				else 
+				{
+					parent.setRightChild(null);
+				}
+			}
+			else
+			{
+				root = null;
+			}
+		}
+		
+		else if(node.getLeftChild()!=null && node.getRightChild()!=null)
+		{
+			Node successor = minValue(node.getRightChild());
+			
+			
+		}
 	}
 
 	@Override
@@ -80,15 +128,29 @@ public class BSTImplementation implements BST
 	{
 		BST bst = new BSTImplementation();
 		try {
-			System.out.println(bst.add("b", "one"));
-			System.out.println(bst.add("a", "Two"));
-			System.out.println(bst.add("a", "Three"));
+			bst.add("b", "one");
+			bst.add("a", "Two");
+			bst.add("d", "Three");
+			bst.add("e", "Four");
+			bst.add("c", "Five");
+			bst.delete("e");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+//			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 		
 		bst.inOrder();
+	}
+
+	@Override
+	public Node minValue(Node node) 
+	{
+		if(node.getLeftChild()!=null)
+		{
+			return minValue(node.getLeftChild());
+		}
+		return node;
+		
 	}
 	
 }
