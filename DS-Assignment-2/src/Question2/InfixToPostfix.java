@@ -98,14 +98,15 @@ public class InfixToPostfix
 	//This method will check for the string is valid alphabet or not
 	private boolean isElementAlphabet(String element) {
 		boolean result=false;
+		
 		if(element.length()>1)
 			return result;
-		for(int index=0;index<element.length();index++) {
-			if(Character.isLetter(element.charAt(index)))
-				result=true;
-			else
-				return result;
-		}
+		
+		if(Character.isLetter(element.charAt(0)))
+			result=true;
+		else
+			return result;
+		
 		return result;
 	}
 	
@@ -122,16 +123,7 @@ public class InfixToPostfix
 	
 	
 	
-	public static void main(String args[])
-	{
-		InfixToPostfix infixToPostfix = new InfixToPostfix();
-		try {
-			System.out.println(infixToPostfix.convertToPostfix("a + b"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 
 	
 }

@@ -22,6 +22,7 @@ public class TestCases
 		assertEquals("abcd^e-fgh*+^*+i-", infixToPostfix.convertToPostfix("a + b * ( c ^ d - e ) ^ ( f + g * h ) - i"));
 	}
 
+	//Negative TestCase
 	@Test(expected = Exception.class)
 	public void testCase3() throws Exception
 	{
