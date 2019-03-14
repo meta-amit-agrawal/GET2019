@@ -44,7 +44,6 @@ public class InfixToPostfix
 	//This method will convert the infix expression to postfix expression
 	private String evaluate(String[] exp) throws Exception {
 		String postfix="";
-//		stack.Push("N");
 		
 		for(int index=0;index<exp.length;index++) 
 		{
