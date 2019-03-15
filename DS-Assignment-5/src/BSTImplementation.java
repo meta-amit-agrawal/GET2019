@@ -210,8 +210,9 @@ public class BSTImplementation implements BST
 		{
 			throw new Exception("Tree is Empty");
 		}
-		else if(checkKey(key))
+		else if(!checkKey(key))
 		{
+			System.out.println("Key Nahi mili");
 			throw new Exception("Key doesn't Exist");
 		}
 		else
@@ -295,51 +296,12 @@ public class BSTImplementation implements BST
 	}
 	
 	//private helper method to check whether given key is available in the tree or not
-	private boolean checkKey(String key) throws Exception
+	private boolean checkKey(String key) throws Exception 
 	{
 		for(Data d : getAll())
 			if(key.equals(d.getKey()))
 				return true;
 		return false;
 	}
-	
 
-	public static void main(String args[]) 
-	{
-		BST bst = new BSTImplementation();
-		try {
-			bst.add("d", "one");
-			bst.add("b", "Two");
-			bst.add("c", "Three");
-			bst.add("e", "Four");
-			bst.add("f", "Five");
-			bst.add("a", "Five");
-			bst.delete("d");
-//			bst.delete("a");
-			System.out.println(bst.findValue("d"));
-//			List<Data> list = bst.getBetweenKeys("e", "f");
-//			for(Data d : list)
-//			{
-//				System.out.println(d.getKey()+"  "+d.getValue());
-//			}
-			System.out.println("All");
-			List<Data> list1 = bst.getAll();
-			for(Data d : list1)
-			{
-				System.out.println(d.getKey()+"  "+d.getValue());
-			}
-			
-		} catch (Exception e) {
-//			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-		
-	}
-
-	
-	
-
-	
-	
-	
 }
