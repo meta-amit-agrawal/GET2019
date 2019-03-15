@@ -212,7 +212,6 @@ public class BSTImplementation implements BST
 		}
 		else if(!checkKey(key))
 		{
-			System.out.println("Key Nahi mili");
 			throw new Exception("Key doesn't Exist");
 		}
 		else
