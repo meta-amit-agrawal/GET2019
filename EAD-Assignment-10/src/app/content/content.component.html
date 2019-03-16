@@ -1,0 +1,15 @@
+<div class="row py-2">
+    <div class="col-10  d-flex">
+            <input type="text" name="search" id="search" placeholder="Search..." class="col-11 form-control" />
+            <button class="btn btn-warning col-1 mx-2" name="search">Search</button>
+    </div>
+    <div class="col-2 align-content-end ">
+        <a routerLink="/add" class="btn btn-primary ">Add User</a>
+    </div>
+</div> 
+<div class="row-custom my-4">
+  
+      <app-card *ngFor="let person of persons$" 
+      [person]="person"></app-card>
+</div>
+
