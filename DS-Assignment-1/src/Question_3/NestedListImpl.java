@@ -1,11 +1,17 @@
 package Question_3;
 import org.json.simple.JSONArray;
 
-
+/**
+ * Implementation of Nested List using linked allocation
+ * @author admin
+ *
+ */
 public class NestedListImpl implements NestedList 
 {
+	//Linked List to store the nested list
 	LinkedList nestedList = new LinkedList();
 
+	//constructor to create the nested list from the JSON array
 	public NestedListImpl(JSONArray jsonArray) throws Exception 
 	{
 		if(jsonArray == null)
@@ -14,12 +20,18 @@ public class NestedListImpl implements NestedList
 		}
 		else
 		{
+			//calling the private helper method to store the list
 			createNestList(jsonArray);
 			nestedList = createNestList(jsonArray);
 		}
 	}
 	
-	private LinkedList createNestList(JSONArray jsonArray) throws Exception 
+	/**
+	 * Private helper method to get the value from the JSON and store using linked allocation
+	 * @param jsonArray which contains the input value
+	 * @return the linked list which contain the input value 
+	 */
+	private LinkedList createNestList(JSONArray jsonArray) 
 	{
 		LinkedList sublist = new LinkedList();
 		for(Object object : jsonArray)
@@ -33,6 +45,7 @@ public class NestedListImpl implements NestedList
 				}
 				else
 				{
+					//getting the nested json array from the input
 					JSONArray newJsonArray = (JSONArray) object;
 					LinkedList list = createNestList(newJsonArray);
 					sublist.add(list);
@@ -42,6 +55,10 @@ public class NestedListImpl implements NestedList
 		return sublist;
 	}
 
+	/**
+	 * getSum method to get the sum of the whole list
+	 * @return the sum of the whole list
+	 */
 	@Override
 	public Long getSum() 
 	{
@@ -49,11 +66,17 @@ public class NestedListImpl implements NestedList
 		return sumOfAllValues(head);
 	}
 	
+	/**
+	 * private helper method to get the sum of the whole list
+	 * @param node is the starting node from which sum is to be calculated
+	 * @return the sum of the whole list
+	 */
 	private Long sumOfAllValues(Node node)
 	{
 		Long sum = (long) 0;
 		if(node != null)
 		{
+			//traversing the list to the end
 			while(node != null)
 			{
 				if(node.getData() instanceof Long)
@@ -61,6 +84,7 @@ public class NestedListImpl implements NestedList
 					sum += (Long) node.getData();
 					node = node.getNext();
 				}
+				//if node is pointing to another linked list then call the same method recursively
 				else
 				{
 					Node head = ((LinkedList)node.getData()).getHead();
@@ -72,6 +96,10 @@ public class NestedListImpl implements NestedList
 		return sum;
 	}
 
+	/**
+	 * method to get the maximum value from the list
+	 * @return the max value from the list
+	 */
 	@Override
 	public Long getMaxValue() 
 	{
@@ -79,12 +107,18 @@ public class NestedListImpl implements NestedList
 		return getMaxValueFromList(head);
 	}
 
+	/**
+	 * private helper method to find the maximum value from the list
+	 * @param node 
+	 * @return the value which is maximum in the list
+	 */
 	private Long getMaxValueFromList(Node node) 
 	{
 		Long max = (long) 0;
 		
 		if(node != null)
 		{
+			//traversing the linked list to the end
 			while(node != null)
 			{
 				if(node.getData() instanceof Long)
@@ -95,6 +129,7 @@ public class NestedListImpl implements NestedList
 					}
 					node = node.getNext();
 				}
+				//if node is pointing to another linked list then call the same method recursively
 				else
 				{
 					Node head = ((LinkedList)node.getData()).getHead();
@@ -107,6 +142,11 @@ public class NestedListImpl implements NestedList
 		return max;
 	}
 
+	/**
+	 * method to check whether given value is available in the list
+	 * @param value is to be searched for
+	 * @return true if value is present or false
+	 */
 	@Override
 	public boolean isValueAvailable(int value)
 	{
@@ -114,10 +154,17 @@ public class NestedListImpl implements NestedList
 		return searchValue(head, value);
 	}
 	
+	/**
+	 * private helper method to search the given value in the list
+	 * @param node is the starting node from which searching to be start
+	 * @param value to be searched for
+	 * @return true if value is available or false
+	 */
 	private boolean searchValue(Node node, int value) 
 	{
 		if(node != null)
 		{
+			//traversing the list to the end
 			while(node != null)
 			{
 				if(node.getData() instanceof Long)
@@ -128,6 +175,7 @@ public class NestedListImpl implements NestedList
 					}
 					node = node.getNext();
 				}
+				//if node is pointing to another linked list then call the same method recursively
 				else
 				{
 					Node head = ((LinkedList)node.getData()).getHead();

@@ -1,15 +1,21 @@
 package Question_3;
 
+//Implementation of linked list
 public class LinkedList 
 {
 	
-	Node head;
+	private Node head;
 	
+	//constructor to initialize the linked list with null
 	public LinkedList()
 	{
 		head=null;
 	}
 	
+	/**
+	 * to add the data into the linked list
+	 * @param data to be added into the list
+	 */
 	public void add(Object data)
 	{
 		Node node = new Node(data);
@@ -32,28 +38,24 @@ public class LinkedList
 		}
 	}
 	
-	public void print()
-	{
-		
-	}
-	
+	/**
+	 * to get the head of the linked list
+	 * @return the head of the linked list
+	 */
 	public Node getHead()
 	{
 		return this.head;
 	}
 	
+	/**
+	 * to check whether linked list is empty or not
+	 * @return true if list is empty or false if not
+	 */
 	public boolean isEmpty()
 	{
 		if(head==null)
 			return true;
 		return false;
 	}
-
-	@Override
-	public String toString() {
-		return "LinkedList [head=" + head + "]";
-	}
-	
-	
 	
 }
