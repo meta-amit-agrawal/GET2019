@@ -1,12 +1,12 @@
 package Question_1_2;
-import java.util.ArrayList;
-import java.util.List;
+
+import Question_1_2.Node;
 
 
 public class LinkedList 
 {
 	
-	Node head,current;
+	Node head;
 	int size;
 	
 	public LinkedList()
@@ -37,131 +37,95 @@ public class LinkedList
 		if(isEmpty())
 		{
 			head = node;
+		}
+		else
+		{
+			Node current=head;
+			Node prev=null;
+			while(current!=null)
+			{
+				prev = current;
+				current = current.getNext();
+			}
+			prev.setNext(node);
 			current = node;
-			size+=1;
-		}
-		else
-		{
-			current.setNext(node);
-			current=node;
-			size+=1;
 		}
 		
 	}
 	
-	public void rotate(int left, int right, int noOfTimes) throws Exception
-	{
-		System.out.println(size);
-		if(left == 1 && right == size)
-		{
-			System.out.println("Ye Chala");
-			if (noOfTimes > size) 
-			{ 
-				noOfTimes = noOfTimes % size; 
-			}
-			int count=1;
-			Node current = head;
-			while(count < noOfTimes && current.getNext()!=null)
-			{
-				current = current.getNext();
-				count++;
-			}
-			
-			Node kthNode = current;
-			while(current.getNext()!=null)
-			{
-				current = current.getNext();
-			}
-			current.setNext(head);
-			head = kthNode.getNext();
-			kthNode.setNext(null);
-		}
-		else
-		{
-			rotatSubList(left, right, noOfTimes);
-		}
-	}
+	 private LinkedList rotate(int round,LinkedList list) 
+	    { 
+	        if (round == 0) return list; 
+	  
+	        Node current  = list.head; 
+	  
+	        int count = 1; 
+	        while (count < round && current !=  null) 
+	        { 
+	            current = current.getNext(); 
+	            count++; 
+	        } 
+	  
+	        if (current == null) 
+	            return list; 
+	  
+	        Node kthNode = current; 
+	        while (current.getNext() != null) 
+	            current = current.getNext(); 
+	  
+	        current.setNext(list.head); 
+	        list.head = kthNode.getNext(); 
+	        kthNode.setNext(null); 
+	        return list;
+	  
+	    } 
+
+	    /**
+	     * method to rotate a list clock wise by given number
+	     * @param left
+	     * @param right
+	     * @param noOfTimes
+	     */
+	    public void rotateList(int left,int right,int roundNumber){
+	    	LinkedList listOne = new LinkedList();
+	    	LinkedList listTwo = new LinkedList();
+	    	Node current = head;
+	    	int start=1;
+	    	while(start<left)
+	    	{
+	    		listOne.addData(current.getData());
+	    		current = current.getNext();
+	    		start++;
+	    	}
+	    	
+	    	while(start<=right)
+	    	{
+	    		listTwo.addData(current.getData());
+	    		current = current.getNext();
+	    		start++;
+	    	}
+	    	
+	    	listTwo = rotate(roundNumber, listTwo);
+	    	
+	    	Node node = listTwo.head;
+	    	while(node != null)
+	    	{
+	    		listOne.addData(node.getData());
+	    		node = node.getNext();
+	    	}
+	    	while(current!=null)
+	    	{
+	    		listOne.addData(current.getData());
+	    		current = current.getNext();
+	    	}
+	    	node = listOne.head;
+	    	while(node!=null)
+	    	{
+	    		System.out.println(node.getData());
+	    		node = node.getNext();
+	    	}
+	    }
 	
-	
-	/*
-	 * rotate method rotates the sublist for which positions are given
-	 * @param left is the starting position of the sublist
-	 * @param right is the ending position of the sublist
-	 * @param noOfTimes is the times to rotate the sublist
-	 * @return
-	 */
-	public void rotatSubList(int left,int right,int noOfTimes) throws Exception
-	{
-		
-		int subListSize = right - left + 1;
-		
-		//checking the coordinates of the sublist is valid or not 
-		if(left < 0 || right >size || left > right)
-	    {
-			throw new Exception("Provide Valid Left and Right Coordinates");
-	    }
-		 
-		//if number of times to be rotated is greater than size of sublist then modulus is taken 
-		if (noOfTimes > subListSize) 
-		{ 
-			noOfTimes = noOfTimes % subListSize; 
-		}
-	    
-		Node node=head;
-	    Node end;
-	    Node joint_start=node;
-	    Node joint_end;
-	    int start_position=1;
-	    int end_position;
-	    
-	    while(start_position<left-1) 
-	    {
-	    	joint_start=joint_start.getNext();
-	    	start_position++;
-	    }
-	    end_position=left;
-	    joint_end=joint_start.getNext();
-	    
-	    while(end_position<right) 
-	    {
-	    	joint_end=joint_end.getNext();
-	    	end_position++;
-	    }
-	    
-	    Node start=joint_start.getNext();
-	    
-	    if(joint_end==null) 
-	    {
-	    	end=joint_end;
-	    }
-	    else 
-	    {
-	    	end=joint_end.getNext();
-	    }
-	    
-	  for(int i=0;i<noOfTimes;i++)
-	  {
-	    	Node temp=start;
-	    	start=start.getNext();
-	    	joint_end.setNext(temp);
-	    	joint_end=temp;
-	  }
-	  joint_start.setNext(start);
-	  joint_end.setNext(end);
-	}
-	
-	public List<Integer> getList()
-	{
-		Node node = head;
-		List<Integer> list = new ArrayList<Integer>();
-		while(node!=null)
-		{
-			list.add(node.getData());
-			node = node.getNext();
-		}
-		System.out.println(list);
-		return list;
-	}
 	
 	
 	/*

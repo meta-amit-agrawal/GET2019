@@ -38,12 +38,6 @@ public class TestLinkedList
 	@Test
 	public void testRotateWithValidCoordinates()
 	{
-		List<Integer> expected = new ArrayList<Integer>();
-		expected.add(1);
-		expected.add(4);
-		expected.add(2);
-		expected.add(3);
-		expected.add(5);
 		
 		LinkedList linkedList =new LinkedList();
 		linkedList.addData(1);
@@ -53,11 +47,10 @@ public class TestLinkedList
 		linkedList.addData(5);
 		linkedList.addData(6);
 		linkedList.addData(7);
-		linkedList.addData(8);
 		try 
 		{
-			linkedList.rotate(4, 6, 1);
-			linkedList.getList();
+			linkedList.rotateList(1, 7, 1);
+			
 //			List<Integer> list = linkedList.getList();
 //			System.out.println(list);
 		}
