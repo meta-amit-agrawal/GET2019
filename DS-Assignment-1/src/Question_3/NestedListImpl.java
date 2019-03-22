@@ -1,19 +1,10 @@
 package Question_3;
-
-import java.io.FileReader;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 
 public class NestedListImpl implements NestedList 
 {
-	
-	List<Object> nestedList = new LinkedList<Object>();
+	LinkedList nestedList = new LinkedList();
 
 	public NestedListImpl(JSONArray jsonArray) throws Exception 
 	{
@@ -23,15 +14,14 @@ public class NestedListImpl implements NestedList
 		}
 		else
 		{
+			createNestList(jsonArray);
 			nestedList = createNestList(jsonArray);
-			System.out.println(nestedList);
 		}
 	}
-
 	
-	private List<Object> createNestList(JSONArray jsonArray) throws Exception 
+	private LinkedList createNestList(JSONArray jsonArray) throws Exception 
 	{
-		
+		LinkedList sublist = new LinkedList();
 		for(Object object : jsonArray)
 		{
 			if(object!=null)
@@ -39,52 +29,114 @@ public class NestedListImpl implements NestedList
 				if(object instanceof Long)
 				{
 					long value = (Long) object;
-					System.out.println(value);
-					//nestedList.add(value);
+					sublist.add(value);
 				}
 				else
 				{
 					JSONArray newJsonArray = (JSONArray) object;
-					createNestList(newJsonArray);
+					LinkedList list = createNestList(newJsonArray);
+					sublist.add(list);
 				}
 			}
 		}
-		return null;
+		return sublist;
 	}
 
 	@Override
-	public int getSum() 
+	public Long getSum() 
 	{
-		return 0;
+		Node head = nestedList.getHead();
+		return sumOfAllValues(head);
+	}
+	
+	private Long sumOfAllValues(Node node)
+	{
+		Long sum = (long) 0;
+		if(node != null)
+		{
+			while(node != null)
+			{
+				if(node.getData() instanceof Long)
+				{
+					sum += (Long) node.getData();
+					node = node.getNext();
+				}
+				else
+				{
+					Node head = ((LinkedList)node.getData()).getHead();
+					node = node.getNext();
+					sum += sumOfAllValues(head);
+				}
+			}
+		}
+		return sum;
 	}
 
 	@Override
-	public int getMaxValue() 
+	public Long getMaxValue() 
 	{
-		return 0;
+		Node head = nestedList.getHead();
+		return getMaxValueFromList(head);
+	}
+
+	private Long getMaxValueFromList(Node node) 
+	{
+		Long max = (long) 0;
+		
+		if(node != null)
+		{
+			while(node != null)
+			{
+				if(node.getData() instanceof Long)
+				{
+					if(max < (Long) node.getData())
+					{
+						max= (Long) node.getData();
+					}
+					node = node.getNext();
+				}
+				else
+				{
+					Node head = ((LinkedList)node.getData()).getHead();
+					node = node.getNext();
+					max = (long) getMaxValueFromList(head);
+				}
+			}
+		}
+		
+		return max;
 	}
 
 	@Override
 	public boolean isValueAvailable(int value)
 	{
-		return false;
+		Node head = nestedList.getHead();
+		return searchValue(head, value);
 	}
 	
-	public static void main(String args[]) throws Exception
+	private boolean searchValue(Node node, int value) 
 	{
-		
-		JSONArray json = null;
-		JSONParser parser = new JSONParser();
-	    try 
-	    {
-	        json = (JSONArray) parser.parse(new FileReader("input.json"));
-	    }
-	    catch(Exception e)
-	    {
-	        System.out.println(e.getMessage());
-	    }
-		
-		NestedListImpl nestedListImpl = new NestedListImpl(json);
+		if(node != null)
+		{
+			while(node != null)
+			{
+				if(node.getData() instanceof Long)
+				{
+					if(value == (Long) node.getData())
+					{
+						return true;
+					}
+					node = node.getNext();
+				}
+				else
+				{
+					Node head = ((LinkedList)node.getData()).getHead();
+					node = node.getNext();
+					return searchValue(head, value);
+				}
+			}
+		}
+		return false;
 	}
 	
 }
