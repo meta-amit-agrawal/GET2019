@@ -37,6 +37,7 @@ public class LinkedList
 		if(isEmpty())
 		{
 			head = node;
+			size+=1;
 		}
 		else
 		{
@@ -49,10 +50,12 @@ public class LinkedList
 			}
 			prev.setNext(node);
 			current = node;
+			size+=1;
 		}
 		
 	}
 	
+	//Helper method to rotate the list by the given number of times
 	 private LinkedList rotate(int round,LinkedList list) 
 	    { 
 	        if (round == 0) return list; 
@@ -85,8 +88,21 @@ public class LinkedList
 	     * @param left
 	     * @param right
 	     * @param noOfTimes
+	     * @throws Exception 
 	     */
-	    public void rotateList(int left,int right,int roundNumber){
+	    public void rotateList(int left,int right,int roundNumber) throws Exception
+	    {
+	    	int subSize = right - left +1;
+	    	if(left > right || left < 1 || right > size)
+	    	{
+	    		throw new Exception("Invalid Input");
+	    	}
+	    	
+	    	if(roundNumber > subSize)
+	    	{
+	    		roundNumber = roundNumber % subSize;
+	    	}
+	    	
 	    	LinkedList listOne = new LinkedList();
 	    	LinkedList listTwo = new LinkedList();
 	    	Node current = head;
@@ -118,15 +134,8 @@ public class LinkedList
 	    		listOne.addData(current.getData());
 	    		current = current.getNext();
 	    	}
-	    	node = listOne.head;
-	    	while(node!=null)
-	    	{
-	    		System.out.println(node.getData());
-	    		node = node.getNext();
-	    	}
+	    	head = listOne.head;	    	
 	    }
-	
-	
 	
 	/*
 	 * detectLoop method checks whether loop is available in the linked list or not
@@ -149,5 +158,10 @@ public class LinkedList
 			}
 		}
 		return false;
+	}
+	
+	public Node getHead()
+	{
+		return this.head;
 	}
 }

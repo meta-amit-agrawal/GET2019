@@ -21,7 +21,6 @@ public class NestedListImpl implements NestedList
 		else
 		{
 			//calling the private helper method to store the list
-			createNestList(jsonArray);
 			nestedList = createNestList(jsonArray);
 		}
 	}
