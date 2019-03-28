@@ -11,30 +11,30 @@ public class Command {
 
 
 
-	/*
+	/* to get the current working folder
 	 * @return currentFolder, in which folder you are working currently
-	 * */
+	 */
 	public Folder getCurrentFolder() {
 		return currentFolder;
 	}
 
-	/*
+	/*method to set the current folder
 	 * @param currentFolder
-	 * */
+	 */
 	public void setCurrentFolder(Folder currentFolder) {
 		this.currentFolder = currentFolder;
 	}
 
-	/*
+	/* to get the list of folder 
 	 * @return List folder 
-	 * */
+	 */
 	public List<String> getFolders() {
 		return folders;
 	}
 
-	/*
-	 * Constructor
-	 * */
+	/* 
+	 * to initialize with root directory
+	 */
 	public Command() {
 		currentFolder = new Folder(ConstantClass.rootDirectoryName);
 	}
@@ -42,7 +42,7 @@ public class Command {
 
 	/*
 	 * Flow of Virtual command prompt will start from here
-	 *  */
+	 */
 	public void runVcp() {
 		
 		String inputCommand;
@@ -107,9 +107,9 @@ public class Command {
 
 
 	/*
-	 * @param folderName,new folder name which is going to be create in this current folder
-	 * 
-	 * */
+	 * method to make the directory
+	 * @param folderName,new folder name which is going to be create in this current folder 
+	 */
 	public void mkdir(String folderName) {
 		boolean status = this.getCurrentFolder().mkdir(folderName);
 		if(status == false) {
@@ -119,8 +119,9 @@ public class Command {
 	}
 
 	/*
+	 *  method to change the current working directory
 	 *  @param folderName,sub folder name  which is going to be current folder now
-	 *  */
+	 */
 	public void cd(String folderName) {
 		Folder subFolder = this.getCurrentFolder().cd(folderName);
 		if(subFolder!=null) {
@@ -133,8 +134,9 @@ public class Command {
 
 	
 	/*
+	 *  To search for the folder available in any sub directory or directory
 	 *  @param folderName,for finding folder recursively in current folder in it's sub folder as well
-	 *  */
+	 */
 	public void search(String folderName) {
 		Folder foundFolder = this.getCurrentFolder().find(folderName);
 		if(foundFolder!=null) {
@@ -146,9 +148,10 @@ public class Command {
 	}
 
 	/*
+	 * return the path of the folder
 	 * @param foundFolder, for finding path of given folder
 	 * @param path, path of foundFolder in string form
-	 * */
+	 */
 	private String getPathOfFolder(Folder foundFolder) {
 		Folder currentFolder = foundFolder;
 		Stack<String> folders = new Stack<String>();	
@@ -166,7 +169,7 @@ public class Command {
 	
 	/*
 	 * moving form current directory to it's parent directory 
-	 * */
+	 */
 	public void bk() {	
 		if(this.getCurrentFolder().getParent()!=null) {
 			this.setCurrentFolder(this.getCurrentFolder().getParent());
@@ -176,7 +179,7 @@ public class Command {
 
 	/*
 	 * will print all the subFolder in this folder
-	 * */
+	 */
 	public void ls() {
 		List<Folder> subFolders = this.getCurrentFolder().ls();
 		
@@ -211,9 +214,9 @@ public class Command {
 
 	/*
 	 * Will print the whole path of current working directory
-	 * */
+	 */
 	private void printPath() {
-		System.out.print("R:");
+		System.out.print(ConstantClass.rootDirectoryName);
 		for(String folderName : this.getFolders()) {
 			System.out.print("\\" + folderName );
 		}

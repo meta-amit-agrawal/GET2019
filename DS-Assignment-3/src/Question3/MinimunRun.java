@@ -5,10 +5,11 @@ import java.util.List;
 
 public class MinimunRun 
 {
-	
+	//to store the list of bowlers
 	List<Bowlers> bowlersList = new ArrayList<>();
 	int totalBalls;
 	
+	//constructor to initialize the list of bowlers into the list 
 	public MinimunRun(Bowlers[] bowlers, int totalBalls) throws Exception
 	{
 		initializeList(bowlers);
@@ -18,6 +19,7 @@ public class MinimunRun
 			throw new Exception("Total number of balls to be played cannot be zero or negative");
 	}
 	
+	//private method to initialize the list of the bowlers 
 	private void initializeList(Bowlers[] bowlers) throws Exception 
 	{
 		if(bowlers.length>0)
@@ -34,6 +36,7 @@ public class MinimunRun
 		
 	}
 
+	//sort the list of bowlers according to number of bowlers
 	private void sortBowlers()
 	{
 		for(int i=0;i<bowlersList.size()-1;i++) 
@@ -50,6 +53,7 @@ public class MinimunRun
 		}
 	}
 	
+	//return the list of bowlers which is in ordered according to the maximum bowls left 
 	public List<Bowlers> getOrderBowlers() throws Exception
 	{
 		if(getTotalBowlsOfBowlers() < totalBalls)
@@ -70,6 +74,7 @@ public class MinimunRun
 		return orderOfBowlers;
 	}
 	
+	//to calculate the total number of bowls of all bowlers  
 	private int getTotalBowlsOfBowlers()
 	{
 		int sum = 0;
@@ -78,27 +83,6 @@ public class MinimunRun
 			sum += b.getRemainingBowls();
 		}
 		return sum;
-	}
-	
-	
-	
-	public static void main(String args[]) throws Exception
-	{
-		
-		try 
-		{
-			Bowlers[] bowlers = new Bowlers[] {new Bowlers("Umesh", 10), new Bowlers("Shami",3), new Bowlers("Chahal",1)};
-			MinimunRun minimunRun = new MinimunRun(bowlers, 17);
-			List<Bowlers> bowl = minimunRun.getOrderBowlers();
-			for(Bowlers b : bowl)
-			{
-				System.out.println(b.getName());
-			}
-		} 
-		catch (Exception e) 
-		{
-			System.out.println(e.getMessage());
-		}
 	}
 	
 }

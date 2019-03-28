@@ -2,15 +2,18 @@ package Question2;
 
 public class PriorityQueue 
 {
+	//reference of array of node
 	Node[] node;
 	int start = 0;
 	int end = 0;
 	
+	//constructor to define the size of the array
 	public PriorityQueue(int size) 
 	{
 		node = new Node[size];
 	}
 	
+	//enqueue method to add the data into the node array
 	public void enqueue(Node node) throws Exception
 	{
 		if(isFull())
@@ -24,6 +27,7 @@ public class PriorityQueue
 		}
 	}
 	
+	//to check whether array is full or not
 	public boolean isFull()
 	{
 		if(end > node.length-1)
@@ -33,6 +37,7 @@ public class PriorityQueue
 		return false;
 	}
 	
+	//private helper method to sort the array according to the priority
 	private void getSorted()
 	{
 		for(int i=start;i<=end;i++)
@@ -49,6 +54,7 @@ public class PriorityQueue
 		}
 	}
 	
+	//dequeue method to delete the data or node from the array
 	public Node dequeue() throws Exception
 	{
 		if(isEmpty())
@@ -63,36 +69,14 @@ public class PriorityQueue
 		}
 	}
 	
+	//to check whether array is empty or not
 	public boolean isEmpty()
 	{
 		if(start == end)
 			return true;
 		return false;
 	}
-	
-	public static void main(String args[])
-	{
-		PriorityQueue priorityQueue = new PriorityQueue(3);
-		try 
-		{
-			priorityQueue.enqueue(new Node(10, 4));
-			priorityQueue.enqueue(new Node(11, 1));
-			priorityQueue.enqueue(new Node(12, 3));
-//			priorityQueue.enqueue(new Node(13, 4));
-//			priorityQueue.enqueue(new Node(14, 5));
-			System.out.println(priorityQueue.dequeue().getData());
-			System.out.println(priorityQueue.dequeue().getData());
-			System.out.println(priorityQueue.dequeue().getData());
-			System.out.println(priorityQueue.dequeue().getData());
-//			System.out.println(priorityQueue.dequeue().getData());
-//			System.out.println(priorityQueue.dequeue().getData());
-		}
-		catch (Exception e) 
-		{
-			System.out.println(e.getMessage());
-		}
-		
-	}
+
 }
 
 
